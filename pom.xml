@@ -140,6 +140,8 @@
 							<generatorName>spring</generatorName>
 							<apiPackage>com.walmart.glitch.demo.myapi</apiPackage>
 							<modelPackage>com.walmart.glitch.demo.mymodel</modelPackage>
+							<!--<output>${project.build.directory}/generated-sources/openapi</output> //default-->
+							<output>${project.basedir}</output>
 
 							<!--<apiPackage>io.reflectoring.myapi</apiPackage>
 							<modelPackage>io.reflectoring.mymodel</modelPackage>-->
