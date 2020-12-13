@@ -3,7 +3,7 @@ package com.walmart.glitch.demo.myapi;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2020-12-13T16:32:25.780+05:30[Asia/Kolkata]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2020-12-13T16:39:08.159+05:30[Asia/Kolkata]")
 
 @Controller
 @RequestMapping("${openapi.reflectoring.base-path:/v2}")
