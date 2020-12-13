@@ -7,16 +7,16 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("${openapi.reflectoring.base-path:/v2}")
-public class UserApiController implements UserApi {
+public class UsersApiController implements UsersApi {
 
-    private final UserApiDelegate delegate;
+    private final UsersApiDelegate delegate;
 
-    public UserApiController(@org.springframework.beans.factory.annotation.Autowired(required = false) UserApiDelegate delegate) {
-        this.delegate = Optional.ofNullable(delegate).orElse(new UserApiDelegate() {});
+    public UsersApiController(@org.springframework.beans.factory.annotation.Autowired(required = false) UsersApiDelegate delegate) {
+        this.delegate = Optional.ofNullable(delegate).orElse(new UsersApiDelegate() {});
     }
 
     @Override
-    public UserApiDelegate getDelegate() {
+    public UsersApiDelegate getDelegate() {
         return delegate;
     }
 

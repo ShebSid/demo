@@ -142,7 +142,8 @@
 							<modelPackage>com.walmart.glitch.demo.mymodel</modelPackage>
 							<!--<output>${project.build.directory}/generated-sources/openapi</output> //default-->
 							<output>${project.basedir}</output>
-
+							<!--<skipOverwrite>true</skipOverwrite>-->
+							<!--<ignoreFileOverride></ignoreFileOverride>-->
 							<!--<apiPackage>io.reflectoring.myapi</apiPackage>
 							<modelPackage>io.reflectoring.mymodel</modelPackage>-->
 

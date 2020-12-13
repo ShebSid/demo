@@ -13,54 +13,26 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * A delegate to be called by the {@link UserApiController}}.
+ * A delegate to be called by the {@link UsersApiController}}.
  * Implement this interface with a {@link org.springframework.stereotype.Service} annotated class.
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2020-12-13T17:22:05.002+05:30[Asia/Kolkata]")
 
-public interface UserApiDelegate {
+public interface UsersApiDelegate {
 
     default Optional<NativeWebRequest> getRequest() {
         return Optional.empty();
     }
 
     /**
-     * POST /user : Create user
-     * Create user functionality
-     *
-     * @param body Created user object (required)
-     * @return successful operation (status code 200)
-     * @see UserApi#createUser
-     */
-    default ResponseEntity<Void> createUser(User body) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
-
-    /**
-     * DELETE /user/{username} : Delete user
-     * This can only be done by the logged in user.
-     *
-     * @param username The name that needs to be deleted (required)
-     * @return operation successful (status code 201)
-     *         or Invalid username supplied (status code 400)
-     *         or User not found (status code 404)
-     * @see UserApi#deleteUser
-     */
-    default ResponseEntity<Void> deleteUser(String username) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
-
-    /**
-     * GET /user/{username} : Get user by user name
+     * GET /users/{username} : Get users by user name
      *
      * @param username The name that needs to be fetched. Use user1 for testing.  (required)
      * @return successful operation (status code 200)
      *         or User not found (status code 404)
-     * @see UserApi#getUserByName
+     * @see UsersApi#getUsersByName
      */
-    default ResponseEntity<User> getUserByName(String username) {
+    default ResponseEntity<User> getUsersByName(String username) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
@@ -75,7 +47,7 @@ public interface UserApiDelegate {
     }
 
     /**
-     * PUT /user/{username} : Updated user
+     * PUT /users/{username} : Updated user
      * This can only be done by the logged in user.
      *
      * @param username name that need to be updated (required)
@@ -83,9 +55,9 @@ public interface UserApiDelegate {
      * @return successful operation (status code 200)
      *         or Invalid user supplied (status code 400)
      *         or User not found (status code 404)
-     * @see UserApi#updateUser
+     * @see UsersApi#updateUsers
      */
-    default ResponseEntity<User> updateUser(String username,
+    default ResponseEntity<User> updateUsers(String username,
         User body) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
