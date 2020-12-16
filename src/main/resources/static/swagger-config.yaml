@@ -1,0 +1,330 @@
+openapi: '3.0.1'
+info:
+  title: RECEIVING INFO COMPOSITE SERVICE API
+  description: Swagger implementation for 'RECEIVING INFO COMPOSITE SERVICE API' service, leveraging annotations at the controller-method level.
+  contact:
+    name: Development Team
+    email: 'vijaykumar.Gajja@walmartlabs.com;aakash.sharma@walmartlabs.com'
+  version: 1.0.0
+servers:
+  - url: https://cam-rec-comp-d.dev07.gbs.ase.southcentralus.us.walmart.net
+    description: Development server
+  - url: https://cam-rec-comp-q.dev07.gbs.ase.southcentralus.us.walmart.net
+    description: QA server
+  - url: https://receiving.comp.cam.api.fds.stg.latam.wal-mart.com
+    description: Stage server
+  - url: https://receiving.comp.cam.api.fds.latam.wal-mart.com
+    description: Production server
+security:
+  - ApiSvcName: []
+  - ApiSvcEnv: []
+  - ApiConsumerId: []
+  - ApiTimestamp: []
+  - ApiAuthSignature: []
+  - ApiKeyVersion: []
+paths:
+  /{countryCode}/v1/receiving/comp/vendors/{vendorNumber}/purchaseOrders/{purchaseOrderId}:
+    get:
+      summary: API to get Receivings Info by Country Code, Vendor Number and PO Id.
+      description: API to get Receivings Info by Country Code, Vendor Number and PO Id.
+      operationId: getReceivingsInfo_1
+      tags:
+        - recv-controller
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '204':
+          description: No content found
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReceivingError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReceivingError'
+      parameters:
+        - $ref: '#/components/parameters/countryCodeParameter'
+        - $ref: '#/components/parameters/vendorNumberParameter'
+        - $ref: '#/components/parameters/purchaseOrderIdParameter'
+        - $ref: '#/components/parameters/lineFlagParameter'
+  /{countryCode}/v1/receiving/comp/locations/{storeNumber}/vendors/{vendorNumber}:
+    get:
+      summary: API to get Receivings Info by Country Code, Store Number and Vendor Number.
+      description: API to get Receivings Info by Country Code, Store Number and Vendor Number.
+      operationId: getReceivingsInfo_2
+      tags:
+        - recv-controller
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '204':
+          description: No content found
+        '400':
+          description: Bad request
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ReceivingError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ReceivingError'
+      parameters:
+        - $ref: '#/components/parameters/countryCodeParameter'
+        - $ref: '#/components/parameters/storeNumberParameter'
+        - $ref: '#/components/parameters/vendorNumberParameter'
+        - $ref: '#/components/parameters/lineFlagParameter'
+        - $ref: '#/components/parameters/receiveIdsParameter'
+        - name: fromDate
+          in: query
+          description: The start date of the request in format yyyy-MM-dd.
+          required: false
+          schema:
+            type: string
+        - name: toDate
+          in: query
+          description: The end date of the request in format yyyy-MM-dd.
+          required: false
+          schema:
+            type: string
+  /{countryCode}/v1/receiving/comp/locations/{storeNumber}:
+    get:
+      summary: API to get Receivings Info by Country Code, Store Number, from date and to date.
+      description: API to get Receivings Info by Country Code, Store Number, from date and to date.
+      operationId: getReceivingsInfo_3
+      tags:
+        - recv-controller
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '204':
+          description: No content found
+        '400':
+          description: Bad request
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ReceivingError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ReceivingError'
+      parameters:
+        - $ref: '#/components/parameters/countryCodeParameter'
+        - $ref: '#/components/parameters/storeNumberParameter'
+        - $ref: '#/components/parameters/lineFlagParameter'
+        - $ref: '#/components/parameters/fromDateParameter'
+        - $ref: '#/components/parameters/toDateParameter'
+        - name: purchaseOrderNumber
+          in: query
+          description: The purchaseOrderNumber of the request.
+          required: false
+          schema:
+            type: string
+  /{countryCode}/v1/receiving/comp/vendors/{vendorNumber}/purchaseOrderNumbers/{purchaseOrderNumber}:
+    get:
+      summary: API to get Receivings Info by Vendor number and PO number.
+      description: API to get Receivings Info by Vendor number and PO number.
+      operationId: getReceivingsInfo_4
+      tags:
+        - recv-controller
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '204':
+          description: No content found
+        '400':
+          description: Bad request
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ReceivingError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ReceivingError'
+      parameters:
+        - $ref: '#/components/parameters/countryCodeParameter'
+        - $ref: '#/components/parameters/vendorNumberParameter'
+        - $ref: '#/components/parameters/purchaseOrderNumberParameter'
+        - $ref: '#/components/parameters/lineFlagParameter'
+        - $ref: '#/components/parameters/receiveIdsParameter'
+        - name: storeNumber
+          in: query
+          description: The storeNumber of the request.
+          required: false
+          schema:
+            type: integer
+components:
+  parameters:
+    countryCodeParameter:
+      name: countryCode
+      in: path
+      description: The code of the country for which fetching receiving information.
+      required: true
+      schema:
+        type: string
+    storeNumberParameter:
+      name: storeNumber
+      in: path
+      description: The storeNumber of the request.
+      required: true
+      schema:
+        type: integer
+    vendorNumberParameter:
+      name: vendorNumber
+      in: path
+      description: The vendorNumber of the request.
+      required: true
+      schema:
+        type: integer
+    purchaseOrderIdParameter:
+      name: purchaseOrderId
+      in: path
+      description: The purchaseOrderId of the request.
+      required: true
+      schema:
+        type: integer
+    purchaseOrderNumberParameter:
+      name: purchaseOrderNumber
+      in: path
+      description: The purchaseOrderNumber of the request.
+      required: true
+      schema:
+        type: string
+    lineFlagParameter:
+      name: lineFlag
+      in: query
+      required: false
+      schema:
+        type: string
+    fromDateParameter:
+      name: fromDate
+      in: query
+      description: The start date of the request in format yyyy-MM-dd.
+      required: true
+      schema:
+        type: string
+    toDateParameter:
+      name: toDate
+      in: query
+      description: The end date of the request in format yyyy-MM-dd.
+      required: true
+      schema:
+        type: string
+    receiveIdsParameter:
+      name: receiveIds
+      in: query
+      required: false
+      schema:
+        type: array
+        items:
+          type: string
+  schemas:
+    LocalTime:
+      properties:
+        hour:
+          type: integer
+          format: int32
+        minute:
+          type: integer
+          format: int32
+        second:
+          type: integer
+          format: int32
+        nano:
+          type: integer
+          format: int32
+    SuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        timestamp:
+          type: string
+          format: date-time
+        data:
+          type: array
+          items:
+            type: object
+    ReceivingError:
+      type: object
+      properties:
+        success:
+          type: boolean
+        timestamp:
+          type: string
+          format: date-time
+        error:
+          items:
+            $ref: '#/components/schemas/ErrorDetails'
+    ErrorDetails:
+      type: object
+      properties:
+        errorCode:
+          type: integer
+          format: int32
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            type: string
+  securitySchemes:
+    ApiSvcName:
+      type: apiKey
+      in: header
+      name: wm_svc.name
+      description: API service name to authorize requests.
+    ApiSvcEnv:
+      type: apiKey
+      in: header
+      name: wm_svc.env
+      description: API service environment to authorize requests.
+    ApiConsumerId:
+      type: apiKey
+      in: header
+      name: wm_consumer.id
+      description: API consumer id to authorize requests.
+    ApiTimestamp:
+      type: apiKey
+      in: header
+      name: WM_CONSUMER.INTIMESTAMP
+      description: API timestamp to authorize requests.
+    ApiAuthSignature:
+      type: apiKey
+      in: header
+      name: WM_SEC.AUTH_SIGNATURE
+      description: API auth signature to authorize requests.
+    ApiKeyVersion:
+      type: apiKey
+      in: header
+      name: WM_SEC.KEY_VERSION
+      description: API key version to authorize requests.
