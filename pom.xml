@@ -150,7 +150,9 @@
 							<goal>generate</goal>
 						</goals>
 						<configuration>
-							<inputSpec>${project.basedir}/src/main/resources/userapi.yml</inputSpec>
+<!--							<inputSpec>${project.basedir}/src/main/resources/userapi.yml</inputSpec>-->
+<!--							<inputSpec>${project.basedir}/src/main/resources/static/locationapi.yml</inputSpec>-->
+							<inputSpec>${project.basedir}/src/main/resources/locationapi.json</inputSpec>
 							<generatorName>spring</generatorName>
 							<apiPackage>com.walmart.glitch.demo.myapi</apiPackage>
 							<modelPackage>com.walmart.glitch.demo.mymodel</modelPackage>
@@ -164,7 +166,7 @@
 							<!--<invokerPackage>com.walmart.glitch.demo</invokerPackage>-->
 							<supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>
 							<configOptions>
-								<delegatePattern>true</delegatePattern>
+								<delegatePattern>false</delegatePattern>
 							</configOptions>
 <!--							<configOptions>-->
 <!--								<interfaceOnly>true</interfaceOnly>-->

@@ -1,33 +1,33 @@
----
 openapi: 3.0.2
 info:
   title: Location Service
   version: '1.0'
-  description: Location is a routing service to global MDM service to fetch store
+  description: >-
+    Location is a routing service to global MDM service to fetch store
     information.
 servers:
-  - url: https://locapi-p-ca.prod01.gbs.ase.southcentralus.us.walmart.net/
+  - url: 'https://locapi-p-ca.prod01.gbs.ase.southcentralus.us.walmart.net/'
     description: Production server for Canada at south central US.
-  - url: https://locapi-p-us.prod01.gbs.ase.southcentralus.us.walmart.net/
+  - url: 'https://locapi-p-us.prod01.gbs.ase.southcentralus.us.walmart.net/'
     description: Production server for US at south central US
-  - url: https://locapi-q-us.dev01.gbs.ase.southcentralus.us.walmart.net/
+  - url: 'https://locapi-q-us.dev01.gbs.ase.southcentralus.us.walmart.net/'
     description: QA server for US at south central US.
-  - url: https://locapi-q-ca.dev01.gbs.ase.southcentralus.us.walmart.net/
+  - url: 'https://locapi-q-ca.dev01.gbs.ase.southcentralus.us.walmart.net/'
     description: QA server for Canada at south central US
-  - url: https://locapi-s-us.dev02.gbs.ase.southcentralus.us.walmart.net/
+  - url: 'https://locapi-s-us.dev02.gbs.ase.southcentralus.us.walmart.net/'
     description: Staging server for US at south central US.
-  - url: https://locapi-s-us.dev01.gbs.ase.eastus2.us.walmart.net/
+  - url: 'https://locapi-s-us.dev01.gbs.ase.eastus2.us.walmart.net/'
     description: Staging server for US at east US
-  - url: https://locapi-s-ca.dev02.gbs.ase.southcentralus.us.walmart.net/
+  - url: 'https://locapi-s-ca.dev02.gbs.ase.southcentralus.us.walmart.net/'
     description: Staging server for Canada at south central US.
-  - url: https://locapi-s-ca.dev01.gbs.ase.eastus2.us.walmart.net/
+  - url: 'https://locapi-s-ca.dev01.gbs.ase.eastus2.us.walmart.net/'
     description: Staging server for Canada at east US
-  - url: https://locapi-p-us.prod01.gbs.ase.eastus2.us.walmart.net/
+  - url: 'https://locapi-p-us.prod01.gbs.ase.eastus2.us.walmart.net/'
     description: Production server for US at east US.
-  - url: https://locapi-p-ca.prod01.gbs.ase.eastus2.us.walmart.net/
+  - url: 'https://locapi-p-ca.prod01.gbs.ase.eastus2.us.walmart.net/'
     description: Production server for Canada at east US.
 paths:
-  "/{countryCode}/location":
+  '/{countryCode}/location':
     summary: Represents stores information in a country.
     description: Represents stores information in a country.
     get:
@@ -40,38 +40,42 @@ paths:
             USA:
               value: US
           name: countryCode
-          description: Standard country code. Example US = USA, CA = Canada
+          description: 'Standard country code. Example US = USA, CA = Canada'
           schema:
             type: string
           in: path
           required: true
         - name: f
-          description: 'Comma separated list of fields that will be returned in the
-          response. For example: f=locationNbr,name'
+          description: >-
+            Comma separated list of fields that will be returned in the
+            response. For example: f=locationNbr,name
           schema:
             type: string
           in: query
           required: false
         - name: offset
-          description: Zero based index of number of records to skip from start. If
-            not mentioned, it is considered zero.
+          description: >-
+            Zero based index of number of records to skip from start. If not
+            mentioned, it is considered zero.
           schema:
             format: int64
             type: integer
           in: query
           required: false
         - name: page
-          description: Results page you want to retrieve (0..N). If offset is specified,
-            it will be considered too. If not specified, all pages in the result set
-            will be considered.
+          description: >-
+            Results page you want to retrieve (0..N). If offset is specified, it
+            will be considered too. If not specified, all pages in the result
+            set will be considered.
           schema:
             format: int32
             type: integer
           in: query
           required: false
         - name: pageNumber
-          description: Zero based index of page to fetch. If offset is provided, that
-            too will be considered.
+          description: >-
+            Zero based index of page to fetch. If offset is provided, that too
+            will be considered.
           schema:
             format: int32
             type: integer
@@ -100,8 +104,9 @@ paths:
         - style: form
           explode: true
           name: sort
-          description: 'Sorting criteria in the format: property(,asc|desc). Default
-          sort order is ascending. Multiple sort criteria are supported.'
+          description: >-
+            Sorting criteria in the format: property(,asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
           schema:
             type: array
             items:
@@ -109,8 +114,9 @@ paths:
           in: query
           required: false
         - name: sort.sorted
-          description: If passed 'true', the sorting criteria mentioned in parameter
-            'sort' is applied.
+          description: >-
+            If passed 'true', the sorting criteria mentioned in parameter 'sort'
+            is applied.
           schema:
             type: boolean
           in: query
@@ -129,13 +135,23 @@ paths:
             Name of the producer application:
               value: AP-FDS-LOCATIONS-API
           name: WM_SVC.NAME
-          description: "Unique name ( application key name) of the producer application
-          as registered in the service registry portal \n( https://reg.soa.walmart.com).\nConsumer
-          applications have to get a subscription to this producer application in
-          the service registry portal.\nThe actual producer application will have
-          a sidecar deployment of service mesh proxy along with it.\nHence all the
-          consumers need to pass the mandatory headers and get authorization and authentication
-          to reach the application.\n\nThis header is required in all the environments."
+          description: >-
+            Unique name ( application key name) of the producer application as
+            registered in the service registry portal
+
+            ( https://reg.soa.walmart.com).
+
+            Consumer applications have to get a subscription to this producer
+            application in the service registry portal.
+
+            The actual producer application will have a sidecar deployment of
+            service mesh proxy along with it.
+
+            Hence all the consumers need to pass the mandatory headers and get
+            authorization and authentication to reach the application.
+
+
+            This header is required in all the environments.
           schema:
             type: string
           in: header
@@ -144,13 +160,26 @@ paths:
             Environment name of the producer application:
               value: prod
           name: WM_SVC.ENV
-          description: |
-            Name of the environment of the producer application in the service registry portal to which consumer application is subscribed to.
-            For each environment which has to be deployed, an environment is created in service registry portal and same is used to configure the sidecar proxy deployment.
-            As the subscription in service mesh is environment specific; this is a mandatory parameter in all the environments.
+          description: >
+            Name of the environment of the producer application in the service
+            registry portal to which consumer application is subscribed to.
+
+            For each environment which has to be deployed, an environment is
+            created in service registry portal and same is used to configure the
+            sidecar proxy deployment.
+
+            As the subscription in service mesh is environment specific; this is
+            a mandatory parameter in all the environments.
+
 
             Note:
-            Consumers have to pass enviroments according to their subscription. For example if the dev environment of the consumer application is having a subscription to stage environment of the producer application; then only from dev environment of the consumer application stage environment of the producer can be called by passing the WM_SVC.ENV value as stage.
+
+            Consumers have to pass enviroments according to their subscription.
+            For example if the dev environment of the consumer application is
+            having a subscription to stage environment of the producer
+            application; then only from dev environment of the consumer
+            application stage environment of the producer can be called by
+            passing the WM_SVC.ENV value as stage.
           schema:
             type: string
           in: header
@@ -159,15 +188,28 @@ paths:
             Consumer Id of consumer application in a specific environment:
               value: 3fa1e5b2-6c55-4d0f-8ae5-634dbbb723432
           name: WM_CONSUMER.ID
-          description: |
-            Consumer Id in the consumer application from which it has a subscription to the environment (value of WM_SVC.ENV) of the producer application.
+          description: >
+            Consumer Id in the consumer application from which it has a
+            subscription to the environment (value of WM_SVC.ENV) of the
+            producer application.
 
-            Consumer Id can be created in the service registry portal with ssh public key.
+
+            Consumer Id can be created in the service registry portal with ssh
+            public key.
+
             A unique string will be generated for the given public key.
 
-            If a consumer application in dev environment(with consumer Id = 3fa1e5b2-6c55-4d0f-8ae5-634dbbb723242) have a subscription to stage environment of the producer application ( AP-FDS-LOCATIONS-API), then there will be an entry created in the service registry database as AP-FDS-LOCATIONS-API/stage/3fa1e5b2-6c55-4d0f-8ae5-634dbbb723242
 
-            Hence when the consumer pass these 3 headers, it will match with the entry in the database; hence the request will be authorized.
+            If a consumer application in dev environment(with consumer Id =
+            3fa1e5b2-6c55-4d0f-8ae5-634dbbb723242) have a subscription to stage
+            environment of the producer application ( AP-FDS-LOCATIONS-API),
+            then there will be an entry created in the service registry database
+            as AP-FDS-LOCATIONS-API/stage/3fa1e5b2-6c55-4d0f-8ae5-634dbbb723242
+
+
+            Hence when the consumer pass these 3 headers, it will match with the
+            entry in the database; hence the request will be authorized.
+
 
             This is a mandatory header in all the environments.
           schema:
@@ -178,11 +220,14 @@ paths:
             Version of the consumer Id:
               value: '1'
           name: WM_SEC.KEY_VERSION
-          description: |-
+          description: >-
             Key version of the consumer Id as per the service registry portal.
+
             This is autogenerated field when consumer Id is created.
 
-            This is a mandatory header in stage & prod environments as the signature authentication is in place.
+
+            This is a mandatory header in stage & prod environments as the
+            signature authentication is in place.
           schema:
             type: integer
           in: header
@@ -191,27 +236,42 @@ paths:
             Timestamp at the time of signature generation:
               value: '1596901065233'
           name: WM_CONSUMER.INTIMESTAMP
-          description: |-
+          description: >-
             Timestamp in epoch at the time of signature generation.
-            As the generated signature expires every 5 mins, timestamp field has to be passed with the signature for the validation.
 
-            This is a mandatory field for stage & prod environments as the signature authentication is in place.
+            As the generated signature expires every 5 mins, timestamp field has
+            to be passed with the signature for the validation.
+
+
+            This is a mandatory field for stage & prod environments as the
+            signature authentication is in place.
           schema:
             type: integer
           in: header
           required: true
         - examples:
             Sample signature:
-              value: jMXoVjlgcSTwSifCzQ1CM88/ZtzIG49Ec2xy5yUWKfh/42+XN8U9ROd/kj6W/kRqWoU+vtZQrkSovyaV6WkxqK62AGjqXmiVqcyfRZmmrOne80QlrJ2j7MjXv+rhoYf0qvGCTu1S3xMsLN3rh0FtoM4v6TO/Iy7C+RqOxCx7C39NWzsfQlzix7WdxRk59ancuULqo3bL5fF2JfjubLDoD5zahtIBF1amDJFco/e1MOQ1Zamf6HGxMZI20epq0m1CCcEGhFh+kDpniyKbPVsG5EEaAmrCMpvGvrk4ZR+lKvb3J1Flkt4dmDYgknoR1QVqEH9vx6LAZef6phM46aTFiQ==
+              value: >-
+                jMXoVjlgcSTwSifCzQ1CM88/ZtzIG49Ec2xy5yUWKfh/42+XN8U9ROd/kj6W/kRqWoU+vtZQrkSovyaV6WkxqK62AGjqXmiVqcyfRZmmrOne80QlrJ2j7MjXv+rhoYf0qvGCTu1S3xMsLN3rh0FtoM4v6TO/Iy7C+RqOxCx7C39NWzsfQlzix7WdxRk59ancuULqo3bL5fF2JfjubLDoD5zahtIBF1amDJFco/e1MOQ1Zamf6HGxMZI20epq0m1CCcEGhFh+kDpniyKbPVsG5EEaAmrCMpvGvrk4ZR+lKvb3J1Flkt4dmDYgknoR1QVqEH9vx6LAZef6phM46aTFiQ==
           name: WM_SEC.AUTH_SIGNATURE
-          description: |-
+          description: >-
             Generated signature for authentication.
-            Signature is generated based on private key, consumer Id and the key version.
 
-            As the public key is available in service registry portal ( as we have generated consumer Id by submitting ssh public key), generated signature will be decoded by public key and validated using RSA algorithm.
-            Signature will be valid for 5 mins, so that after every 5 mins signature should be regenerated for the new requests.
+            Signature is generated based on private key, consumer Id and the key
+            version.
 
-            This is a mandatory header to be passed in stage & prod environments as the signature authetication is in place.
+
+            As the public key is available in service registry portal ( as we
+            have generated consumer Id by submitting ssh public key), generated
+            signature will be decoded by public key and validated using RSA
+            algorithm.
+
+            Signature will be valid for 5 mins, so that after every 5 mins
+            signature should be regenerated for the new requests.
+
+
+            This is a mandatory header to be passed in stage & prod environments
+            as the signature authetication is in place.
           schema:
             type: string
           in: header
@@ -221,7 +281,7 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/LocationResponse"
+                $ref: '#/components/schemas/LocationResponse'
               examples:
                 Location:
                   value:
@@ -242,13 +302,13 @@ paths:
                         timeZoneId: America/Chicago
                         timeZoneCode: CDT
                         glnNumbers:
-                          - '0078742014937'
+                          - 0078742014937
                         timeZoneDSTObservable: true
                         logisticalCountryCode: US
                         type: Retail
                         typeCode: 100001
                         statusCode: 5
-                        status: OLD, MORE THAN 13 MONTHS SINCE RE-GRAND
+                        status: 'OLD, MORE THAN 13 MONTHS SINCE RE-GRAND'
                         buID: 295634
                         tempStoreFlag: false
                         languageCode: 101
@@ -346,11 +406,11 @@ paths:
                               - departmentNbr: 30
                                 departmentDesc: FOUNDATIONS
                               - departmentNbr: 31
-                                departmentDesc: FASHION, ACCESS & LUGGAGE
+                                departmentDesc: 'FASHION, ACCESS & LUGGAGE'
                               - departmentNbr: 33
                                 departmentDesc: GIRLS WEAR
                               - departmentNbr: 34
-                                departmentDesc: MISSY, ACTIVE & JUNIOR APPAREL
+                                departmentDesc: 'MISSY, ACTIVE & JUNIOR APPAREL'
                               - departmentNbr: 35
                                 departmentDesc: PLUS SIZES/MATERNITY
                               - departmentNbr: 36
@@ -362,7 +422,7 @@ paths:
                               - departmentNbr: 56
                                 departmentDesc: LIVE PLANTS
                               - departmentNbr: 60
-                                departmentDesc: STAMPS, BUILD A BEAR, KIDS CONNECT
+                                departmentDesc: 'STAMPS, BUILD A BEAR, KIDS CONNECT'
                               - departmentNbr: 67
                                 departmentDesc: CELEBRATION
                               - departmentNbr: 69
@@ -464,7 +524,7 @@ paths:
                             businessUnitOrgAreaCode: 99
                             lastUpdatedTimestamp: '2020-06-03'
                             lastUpdatedUser: HRM DATA
-                            storeCode3: N
+                            storeCode3: 'N'
                             companyCode: WMW
                             taxReportCode: 110
                             reportCode: SC
@@ -522,7 +582,7 @@ paths:
                             shrinkRetailPct: 0
                             departments:
                               - departmentNbr: 32
-                                departmentDesc: JEWELRY, SUNGLASSES
+                                departmentDesc: 'JEWELRY, SUNGLASSES'
                               - departmentNbr: 47
                                 departmentDesc: JEWELRY
                           - divisionNbr: 15
@@ -686,7 +746,7 @@ paths:
                             shrinkRetailPct: 0
                             departments:
                               - departmentNbr: 1
-                                departmentDesc: CANDY, TOBACCO
+                                departmentDesc: 'CANDY, TOBACCO'
                               - departmentNbr: 92
                                 departmentDesc: GROCERY
                               - departmentNbr: 95
@@ -763,7 +823,7 @@ paths:
                             businessUnitOrgAreaCode: 2
                             lastUpdatedTimestamp: '2020-06-03'
                             lastUpdatedUser: HRM DATA
-                            storeCode3: N
+                            storeCode3: 'N'
                             reportCode: WK
                             deleteCode: A
                             shrinkPctCost: 0
@@ -830,7 +890,7 @@ paths:
                             businessUnitOrgAreaCode: 2
                             lastUpdatedTimestamp: '2020-06-03'
                             lastUpdatedUser: HRM DATA
-                            storeCode3: N
+                            storeCode3: 'N'
                             companyCode: WR
                             taxReportCode: 310
                             reportCode: WR
@@ -839,51 +899,54 @@ paths:
                             shrinkRetailPct: 0
                         associates:
                           - firstName: JOSEPH
-                            lastName: " CLAREY"
+                            lastName: ' CLAREY'
                             role: MGMT-STORE MANAGER
                             email: J0C04I9.S01526.US@WAL-MART.COM
                             fullName: JOSEPH CLAREY
                           - firstName: LISA DE
-                            lastName: " BOER"
+                            lastName: ' BOER'
                             role: MGMT-MARKET MANAGER
                             email: LDEBOER@WALMART.COM
                             fullName: LISA DE BOER
                           - firstName: GREGORY
-                            lastName: " LUNDELL"
+                            lastName: ' LUNDELL'
                             role: MGMT-REGIONAL MANAGER - AP
                             email: GREGORY.LUNDELL@WALMART.COM
                             fullName: GREGORY LUNDELL
                         mainWarehouse: 6009
                         lastUpdatedDate: '2020-10-01'
                         lastUpdatedTimestamp: '2020-09-29'
-          description: Successfully returns Stores information for the given country
-            code and search criteria like locationNbr, name, etc.
+          description: >-
+            Successfully returns Stores information for the given country code
+            and search criteria like locationNbr, name, etc.
         '204':
-          description: No Content is returned when there is no data for the given
-            country code and search criteria like locationNbr, name, etc.
+          description: >-
+            No Content is returned when there is no data for the given country
+            code and search criteria like locationNbr, name, etc.
         '400':
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-          description: Bad Request is returned when one or many given criteria are
-            of wrong data type or value.
+                $ref: '#/components/schemas/ErrorResponse'
+          description: >-
+            Bad Request is returned when one or many given criteria are of wrong
+            data type or value.
         '500':
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-          description: Internal Server Error is returned in case there is a connectivity
-            issue with the dependent resource or the dependent resource itself throws
-            some exception.
+                $ref: '#/components/schemas/ErrorResponse'
+          description: >-
+            Internal Server Error is returned in case there is a connectivity
+            issue with the dependent resource or the dependent resource itself
+            throws some exception.
       deprecated: false
       operationId: getAllLocationsUsingGET
       summary: Fetches all stores information in a given country.
       description: Fetch all stores information using country code.
-  "/{countryCode}/location/centerManaged":
+  '/{countryCode}/location/centerManaged':
     summary: Represents stores information in a country based on Centre Managed Flag
-    description: Represents stores information in a country based on Centre Managed
-      Flag
+    description: Represents stores information in a country based on Centre Managed Flag
     get:
       tags:
         - location-controller
@@ -894,14 +957,15 @@ paths:
             USA:
               value: US
           name: countryCode
-          description: Standard country code. Example US = USA, CA = Canada
+          description: 'Standard country code. Example US = USA, CA = Canada'
           schema:
             type: string
           in: path
           required: true
         - name: flag
-          description: Flag to indicate whether it is Centre Managed or not. 0 for No
-            and 1 for Yes
+          description: >-
+            Flag to indicate whether it is Centre Managed or not. 0 for No and 1
+            for Yes
           schema:
             format: int32
             type: integer
@@ -911,13 +975,23 @@ paths:
             Name of the producer application:
               value: AP-FDS-LOCATIONS-API
           name: WM_SVC.NAME
-          description: "Unique name ( application key name) of the producer application
-          as registered in the service registry portal \n( https://reg.soa.walmart.com).\nConsumer
-          applications have to get a subscription to this producer application in
-          the service registry portal.\nThe actual producer application will have
-          a sidecar deployment of service mesh proxy along with it.\nHence all the
-          consumers need to pass the mandatory headers and get authorization and authentication
-          to reach the application.\n\nThis header is required in all the environments."
+          description: >-
+            Unique name ( application key name) of the producer application as
+            registered in the service registry portal
+
+            ( https://reg.soa.walmart.com).
+
+            Consumer applications have to get a subscription to this producer
+            application in the service registry portal.
+
+            The actual producer application will have a sidecar deployment of
+            service mesh proxy along with it.
+
+            Hence all the consumers need to pass the mandatory headers and get
+            authorization and authentication to reach the application.
+
+
+            This header is required in all the environments.
           schema:
             type: string
           in: header
@@ -926,13 +1000,26 @@ paths:
             Environment name of the producer application:
               value: prod
           name: WM_SVC.ENV
-          description: |
-            Name of the environment of the producer application in the service registry portal to which consumer application is subscribed to.
-            For each environment which has to be deployed, an environment is created in service registry portal and same is used to configure the sidecar proxy deployment.
-            As the subscription in service mesh is environment specific; this is a mandatory parameter in all the environments.
+          description: >
+            Name of the environment of the producer application in the service
+            registry portal to which consumer application is subscribed to.
+
+            For each environment which has to be deployed, an environment is
+            created in service registry portal and same is used to configure the
+            sidecar proxy deployment.
+
+            As the subscription in service mesh is environment specific; this is
+            a mandatory parameter in all the environments.
+
 
             Note:
-            Consumers have to pass enviroments according to their subscription. For example if the dev environment of the consumer application is having a subscription to stage environment of the producer application; then only from dev environment of the consumer application stage environment of the producer can be called by passing the WM_SVC.ENV value as stage.
+
+            Consumers have to pass enviroments according to their subscription.
+            For example if the dev environment of the consumer application is
+            having a subscription to stage environment of the producer
+            application; then only from dev environment of the consumer
+            application stage environment of the producer can be called by
+            passing the WM_SVC.ENV value as stage.
           schema:
             type: string
           in: header
@@ -941,15 +1028,28 @@ paths:
             Consumer Id of consumer application in a specific environment:
               value: 3fa1e5b2-6c55-4d0f-8ae5-634dbbb723432
           name: WM_CONSUMER.ID
-          description: |
-            Consumer Id in the consumer application from which it has a subscription to the environment (value of WM_SVC.ENV) of the producer application.
+          description: >
+            Consumer Id in the consumer application from which it has a
+            subscription to the environment (value of WM_SVC.ENV) of the
+            producer application.
 
-            Consumer Id can be created in the service registry portal with ssh public key.
+
+            Consumer Id can be created in the service registry portal with ssh
+            public key.
+
             A unique string will be generated for the given public key.
 
-            If a consumer application in dev environment(with consumer Id = 3fa1e5b2-6c55-4d0f-8ae5-634dbbb723242) have a subscription to stage environment of the producer application ( AP-FDS-LOCATIONS-API), then there will be an entry created in the service registry database as AP-FDS-LOCATIONS-API/stage/3fa1e5b2-6c55-4d0f-8ae5-634dbbb723242
 
-            Hence when the consumer pass these 3 headers, it will match with the entry in the database; hence the request will be authorized.
+            If a consumer application in dev environment(with consumer Id =
+            3fa1e5b2-6c55-4d0f-8ae5-634dbbb723242) have a subscription to stage
+            environment of the producer application ( AP-FDS-LOCATIONS-API),
+            then there will be an entry created in the service registry database
+            as AP-FDS-LOCATIONS-API/stage/3fa1e5b2-6c55-4d0f-8ae5-634dbbb723242
+
+
+            Hence when the consumer pass these 3 headers, it will match with the
+            entry in the database; hence the request will be authorized.
+
 
             This is a mandatory header in all the environments.
           schema:
@@ -960,11 +1060,14 @@ paths:
             Version of the consumer Id:
               value: '1'
           name: WM_SEC.KEY_VERSION
-          description: |-
+          description: >-
             Key version of the consumer Id as per the service registry portal.
+
             This is autogenerated field when consumer Id is created.
 
-            This is a mandatory header in stage & prod environments as the signature authentication is in place.
+
+            This is a mandatory header in stage & prod environments as the
+            signature authentication is in place.
           schema:
             type: integer
           in: header
@@ -973,27 +1076,42 @@ paths:
             Timestamp at the time of signature generation:
               value: '1596901065233'
           name: WM_CONSUMER.INTIMESTAMP
-          description: |-
+          description: >-
             Timestamp in epoch at the time of signature generation.
-            As the generated signature expires every 5 mins, timestamp field has to be passed with the signature for the validation.
 
-            This is a mandatory field for stage & prod environments as the signature authentication is in place.
+            As the generated signature expires every 5 mins, timestamp field has
+            to be passed with the signature for the validation.
+
+
+            This is a mandatory field for stage & prod environments as the
+            signature authentication is in place.
           schema:
             type: integer
           in: header
           required: true
         - examples:
             Sample signature:
-              value: jMXoVjlgcSTwSifCzQ1CM88/ZtzIG49Ec2xy5yUWKfh/42+XN8U9ROd/kj6W/kRqWoU+vtZQrkSovyaV6WkxqK62AGjqXmiVqcyfRZmmrOne80QlrJ2j7MjXv+rhoYf0qvGCTu1S3xMsLN3rh0FtoM4v6TO/Iy7C+RqOxCx7C39NWzsfQlzix7WdxRk59ancuULqo3bL5fF2JfjubLDoD5zahtIBF1amDJFco/e1MOQ1Zamf6HGxMZI20epq0m1CCcEGhFh+kDpniyKbPVsG5EEaAmrCMpvGvrk4ZR+lKvb3J1Flkt4dmDYgknoR1QVqEH9vx6LAZef6phM46aTFiQ==
+              value: >-
+                jMXoVjlgcSTwSifCzQ1CM88/ZtzIG49Ec2xy5yUWKfh/42+XN8U9ROd/kj6W/kRqWoU+vtZQrkSovyaV6WkxqK62AGjqXmiVqcyfRZmmrOne80QlrJ2j7MjXv+rhoYf0qvGCTu1S3xMsLN3rh0FtoM4v6TO/Iy7C+RqOxCx7C39NWzsfQlzix7WdxRk59ancuULqo3bL5fF2JfjubLDoD5zahtIBF1amDJFco/e1MOQ1Zamf6HGxMZI20epq0m1CCcEGhFh+kDpniyKbPVsG5EEaAmrCMpvGvrk4ZR+lKvb3J1Flkt4dmDYgknoR1QVqEH9vx6LAZef6phM46aTFiQ==
           name: WM_SEC.AUTH_SIGNATURE
-          description: |-
+          description: >-
             Generated signature for authentication.
-            Signature is generated based on private key, consumer Id and the key version.
 
-            As the public key is available in service registry portal ( as we have generated consumer Id by submitting ssh public key), generated signature will be decoded by public key and validated using RSA algorithm.
-            Signature will be valid for 5 mins, so that after every 5 mins signature should be regenerated for the new requests.
+            Signature is generated based on private key, consumer Id and the key
+            version.
 
-            This is a mandatory header to be passed in stage & prod environments as the signature authetication is in place.
+
+            As the public key is available in service registry portal ( as we
+            have generated consumer Id by submitting ssh public key), generated
+            signature will be decoded by public key and validated using RSA
+            algorithm.
+
+            Signature will be valid for 5 mins, so that after every 5 mins
+            signature should be regenerated for the new requests.
+
+
+            This is a mandatory header to be passed in stage & prod environments
+            as the signature authetication is in place.
           schema:
             type: string
           in: header
@@ -1003,7 +1121,7 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/SuccessCenterManagedResponse"
+                $ref: '#/components/schemas/SuccessCenterManagedResponse'
               examples:
                 Centre Managed Flag = 1:
                   value:
@@ -2132,31 +2250,34 @@ paths:
                         - 2099
                         - 6850
                         - 6340
-          description: Successfully returns Stores information for the given country
-            code and Centre Managed flag.
+          description: >-
+            Successfully returns Stores information for the given country code
+            and Centre Managed flag.
         '204':
-          description: No Content is returned when there is no data for the given
-            country code and Centre Managed flag.
+          description: >-
+            No Content is returned when there is no data for the given country
+            code and Centre Managed flag.
         '400':
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-          description: Bad Request is returned when one or many given criteria are
-            of wrong data type or value.
+                $ref: '#/components/schemas/ErrorResponse'
+          description: >-
+            Bad Request is returned when one or many given criteria are of wrong
+            data type or value.
         '500':
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-          description: Internal Server Error is returned in case there is a connectivity
-            issue with the dependent resource or the dependent resource itself throws
-            some exception.
+                $ref: '#/components/schemas/ErrorResponse'
+          description: >-
+            Internal Server Error is returned in case there is a connectivity
+            issue with the dependent resource or the dependent resource itself
+            throws some exception.
       operationId: getLocationNumberByCenterManaged
       summary: Fetches all stores information for a given country for centre Managed
-      description: Fetch all stores information using country code and Centre Managed
-        flag
-  "/{countryCode}/location/departmentNumber/{departmentNumber}":
+      description: Fetch all stores information using country code and Centre Managed flag
+  '/{countryCode}/location/departmentNumber/{departmentNumber}':
     summary: Represents all stores information for a department in a country.
     description: Represents all stores information for a department in a country.
     get:
@@ -2169,7 +2290,7 @@ paths:
             USA:
               value: US
           name: countryCode
-          description: Standard country code. Example US = USA, CA = Canada
+          description: 'Standard country code. Example US = USA, CA = Canada'
           schema:
             type: string
           in: path
@@ -2185,32 +2306,36 @@ paths:
           in: path
           required: true
         - name: f
-          description: 'Comma separated list of fields that will be returned in the
-          response. For example: f=locationNbr,name'
+          description: >-
+            Comma separated list of fields that will be returned in the
+            response. For example: f=locationNbr,name
           schema:
             type: string
           in: query
           required: false
         - name: offset
-          description: Zero based index of number of records to skip from start. If
-            not mentioned, it is considered zero.
+          description: >-
+            Zero based index of number of records to skip from start. If not
+            mentioned, it is considered zero.
           schema:
             format: int64
             type: integer
           in: query
           required: false
         - name: page
-          description: Results page you want to retrieve (0..N). If offset is specified,
-            it will be considered too. If not specified, all pages in the result set
-            will be considered.
+          description: >-
+            Results page you want to retrieve (0..N). If offset is specified, it
+            will be considered too. If not specified, all pages in the result
+            set will be considered.
           schema:
             format: int32
             type: integer
           in: query
           required: false
         - name: pageNumber
-          description: Zero based index of page to fetch. If offset is provided, that
-            too will be considered.
+          description: >-
+            Zero based index of page to fetch. If offset is provided, that too
+            will be considered.
           schema:
             format: int32
             type: integer
@@ -2239,8 +2364,9 @@ paths:
         - style: form
           explode: true
           name: sort
-          description: 'Sorting criteria in the format: property(,asc|desc). Default
-          sort order is ascending. Multiple sort criteria are supported.'
+          description: >-
+            Sorting criteria in the format: property(,asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
           schema:
             type: array
             items:
@@ -2248,8 +2374,9 @@ paths:
           in: query
           required: false
         - name: sort.sorted
-          description: If passed 'true', the sorting criteria mentioned in parameter
-            'sort' is applied.
+          description: >-
+            If passed 'true', the sorting criteria mentioned in parameter 'sort'
+            is applied.
           schema:
             type: boolean
           in: query
@@ -2268,13 +2395,23 @@ paths:
             Name of the producer application:
               value: AP-FDS-LOCATIONS-API
           name: WM_SVC.NAME
-          description: "Unique name ( application key name) of the producer application
-          as registered in the service registry portal \n( https://reg.soa.walmart.com).\nConsumer
-          applications have to get a subscription to this producer application in
-          the service registry portal.\nThe actual producer application will have
-          a sidecar deployment of service mesh proxy along with it.\nHence all the
-          consumers need to pass the mandatory headers and get authorization and authentication
-          to reach the application.\n\nThis header is required in all the environments."
+          description: >-
+            Unique name ( application key name) of the producer application as
+            registered in the service registry portal
+
+            ( https://reg.soa.walmart.com).
+
+            Consumer applications have to get a subscription to this producer
+            application in the service registry portal.
+
+            The actual producer application will have a sidecar deployment of
+            service mesh proxy along with it.
+
+            Hence all the consumers need to pass the mandatory headers and get
+            authorization and authentication to reach the application.
+
+
+            This header is required in all the environments.
           schema:
             type: string
           in: header
@@ -2283,13 +2420,26 @@ paths:
             Environment name of the producer application:
               value: prod
           name: WM_SVC.ENV
-          description: |
-            Name of the environment of the producer application in the service registry portal to which consumer application is subscribed to.
-            For each environment which has to be deployed, an environment is created in service registry portal and same is used to configure the sidecar proxy deployment.
-            As the subscription in service mesh is environment specific; this is a mandatory parameter in all the environments.
+          description: >
+            Name of the environment of the producer application in the service
+            registry portal to which consumer application is subscribed to.
+
+            For each environment which has to be deployed, an environment is
+            created in service registry portal and same is used to configure the
+            sidecar proxy deployment.
+
+            As the subscription in service mesh is environment specific; this is
+            a mandatory parameter in all the environments.
+
 
             Note:
-            Consumers have to pass enviroments according to their subscription. For example if the dev environment of the consumer application is having a subscription to stage environment of the producer application; then only from dev environment of the consumer application stage environment of the producer can be called by passing the WM_SVC.ENV value as stage.
+
+            Consumers have to pass enviroments according to their subscription.
+            For example if the dev environment of the consumer application is
+            having a subscription to stage environment of the producer
+            application; then only from dev environment of the consumer
+            application stage environment of the producer can be called by
+            passing the WM_SVC.ENV value as stage.
           schema:
             type: string
           in: header
@@ -2298,15 +2448,28 @@ paths:
             Consumer Id of consumer application in a specific environment:
               value: 3fa1e5b2-6c55-4d0f-8ae5-634dbbb723432
           name: WM_CONSUMER.ID
-          description: |
-            Consumer Id in the consumer application from which it has a subscription to the environment (value of WM_SVC.ENV) of the producer application.
+          description: >
+            Consumer Id in the consumer application from which it has a
+            subscription to the environment (value of WM_SVC.ENV) of the
+            producer application.
 
-            Consumer Id can be created in the service registry portal with ssh public key.
+
+            Consumer Id can be created in the service registry portal with ssh
+            public key.
+
             A unique string will be generated for the given public key.
 
-            If a consumer application in dev environment(with consumer Id = 3fa1e5b2-6c55-4d0f-8ae5-634dbbb723242) have a subscription to stage environment of the producer application ( AP-FDS-LOCATIONS-API), then there will be an entry created in the service registry database as AP-FDS-LOCATIONS-API/stage/3fa1e5b2-6c55-4d0f-8ae5-634dbbb723242
 
-            Hence when the consumer pass these 3 headers, it will match with the entry in the database; hence the request will be authorized.
+            If a consumer application in dev environment(with consumer Id =
+            3fa1e5b2-6c55-4d0f-8ae5-634dbbb723242) have a subscription to stage
+            environment of the producer application ( AP-FDS-LOCATIONS-API),
+            then there will be an entry created in the service registry database
+            as AP-FDS-LOCATIONS-API/stage/3fa1e5b2-6c55-4d0f-8ae5-634dbbb723242
+
+
+            Hence when the consumer pass these 3 headers, it will match with the
+            entry in the database; hence the request will be authorized.
+
 
             This is a mandatory header in all the environments.
           schema:
@@ -2317,11 +2480,14 @@ paths:
             Version of the consumer Id:
               value: '1'
           name: WM_SEC.KEY_VERSION
-          description: |-
+          description: >-
             Key version of the consumer Id as per the service registry portal.
+
             This is autogenerated field when consumer Id is created.
 
-            This is a mandatory header in stage & prod environments as the signature authentication is in place.
+
+            This is a mandatory header in stage & prod environments as the
+            signature authentication is in place.
           schema:
             type: integer
           in: header
@@ -2330,27 +2496,42 @@ paths:
             Timestamp at the time of signature generation:
               value: '1596901065233'
           name: WM_CONSUMER.INTIMESTAMP
-          description: |-
+          description: >-
             Timestamp in epoch at the time of signature generation.
-            As the generated signature expires every 5 mins, timestamp field has to be passed with the signature for the validation.
 
-            This is a mandatory field for stage & prod environments as the signature authentication is in place.
+            As the generated signature expires every 5 mins, timestamp field has
+            to be passed with the signature for the validation.
+
+
+            This is a mandatory field for stage & prod environments as the
+            signature authentication is in place.
           schema:
             type: integer
           in: header
           required: true
         - examples:
             Sample signature:
-              value: jMXoVjlgcSTwSifCzQ1CM88/ZtzIG49Ec2xy5yUWKfh/42+XN8U9ROd/kj6W/kRqWoU+vtZQrkSovyaV6WkxqK62AGjqXmiVqcyfRZmmrOne80QlrJ2j7MjXv+rhoYf0qvGCTu1S3xMsLN3rh0FtoM4v6TO/Iy7C+RqOxCx7C39NWzsfQlzix7WdxRk59ancuULqo3bL5fF2JfjubLDoD5zahtIBF1amDJFco/e1MOQ1Zamf6HGxMZI20epq0m1CCcEGhFh+kDpniyKbPVsG5EEaAmrCMpvGvrk4ZR+lKvb3J1Flkt4dmDYgknoR1QVqEH9vx6LAZef6phM46aTFiQ==
+              value: >-
+                jMXoVjlgcSTwSifCzQ1CM88/ZtzIG49Ec2xy5yUWKfh/42+XN8U9ROd/kj6W/kRqWoU+vtZQrkSovyaV6WkxqK62AGjqXmiVqcyfRZmmrOne80QlrJ2j7MjXv+rhoYf0qvGCTu1S3xMsLN3rh0FtoM4v6TO/Iy7C+RqOxCx7C39NWzsfQlzix7WdxRk59ancuULqo3bL5fF2JfjubLDoD5zahtIBF1amDJFco/e1MOQ1Zamf6HGxMZI20epq0m1CCcEGhFh+kDpniyKbPVsG5EEaAmrCMpvGvrk4ZR+lKvb3J1Flkt4dmDYgknoR1QVqEH9vx6LAZef6phM46aTFiQ==
           name: WM_SEC.AUTH_SIGNATURE
-          description: |-
+          description: >-
             Generated signature for authentication.
-            Signature is generated based on private key, consumer Id and the key version.
 
-            As the public key is available in service registry portal ( as we have generated consumer Id by submitting ssh public key), generated signature will be decoded by public key and validated using RSA algorithm.
-            Signature will be valid for 5 mins, so that after every 5 mins signature should be regenerated for the new requests.
+            Signature is generated based on private key, consumer Id and the key
+            version.
 
-            This is a mandatory header to be passed in stage & prod environments as the signature authetication is in place.
+
+            As the public key is available in service registry portal ( as we
+            have generated consumer Id by submitting ssh public key), generated
+            signature will be decoded by public key and validated using RSA
+            algorithm.
+
+            Signature will be valid for 5 mins, so that after every 5 mins
+            signature should be regenerated for the new requests.
+
+
+            This is a mandatory header to be passed in stage & prod environments
+            as the signature authetication is in place.
           schema:
             type: string
           in: header
@@ -2360,7 +2541,7 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/LocationResponse"
+                $ref: '#/components/schemas/LocationResponse'
               examples:
                 Department Number 98:
                   value:
@@ -2381,13 +2562,13 @@ paths:
                         timeZoneId: America/Chicago
                         timeZoneCode: CDT
                         glnNumbers:
-                          - '0078742014937'
+                          - 0078742014937
                         timeZoneDSTObservable: true
                         logisticalCountryCode: US
                         type: Retail
                         typeCode: 100001
                         statusCode: 5
-                        status: OLD, MORE THAN 13 MONTHS SINCE RE-GRAND
+                        status: 'OLD, MORE THAN 13 MONTHS SINCE RE-GRAND'
                         buID: 295634
                         tempStoreFlag: false
                         languageCode: 101
@@ -2485,11 +2666,11 @@ paths:
                               - departmentNbr: 30
                                 departmentDesc: FOUNDATIONS
                               - departmentNbr: 31
-                                departmentDesc: FASHION, ACCESS & LUGGAGE
+                                departmentDesc: 'FASHION, ACCESS & LUGGAGE'
                               - departmentNbr: 33
                                 departmentDesc: GIRLS WEAR
                               - departmentNbr: 34
-                                departmentDesc: MISSY, ACTIVE & JUNIOR APPAREL
+                                departmentDesc: 'MISSY, ACTIVE & JUNIOR APPAREL'
                               - departmentNbr: 35
                                 departmentDesc: PLUS SIZES/MATERNITY
                               - departmentNbr: 36
@@ -2501,7 +2682,7 @@ paths:
                               - departmentNbr: 56
                                 departmentDesc: LIVE PLANTS
                               - departmentNbr: 60
-                                departmentDesc: STAMPS, BUILD A BEAR, KIDS CONNECT
+                                departmentDesc: 'STAMPS, BUILD A BEAR, KIDS CONNECT'
                               - departmentNbr: 67
                                 departmentDesc: CELEBRATION
                               - departmentNbr: 69
@@ -2603,7 +2784,7 @@ paths:
                             businessUnitOrgAreaCode: 99
                             lastUpdatedTimestamp: '2020-06-03'
                             lastUpdatedUser: HRM DATA
-                            storeCode3: N
+                            storeCode3: 'N'
                             companyCode: WMW
                             taxReportCode: 110
                             reportCode: SC
@@ -2661,7 +2842,7 @@ paths:
                             shrinkRetailPct: 0
                             departments:
                               - departmentNbr: 32
-                                departmentDesc: JEWELRY, SUNGLASSES
+                                departmentDesc: 'JEWELRY, SUNGLASSES'
                               - departmentNbr: 47
                                 departmentDesc: JEWELRY
                           - divisionNbr: 15
@@ -2825,7 +3006,7 @@ paths:
                             shrinkRetailPct: 0
                             departments:
                               - departmentNbr: 1
-                                departmentDesc: CANDY, TOBACCO
+                                departmentDesc: 'CANDY, TOBACCO'
                               - departmentNbr: 92
                                 departmentDesc: GROCERY
                               - departmentNbr: 95
@@ -2902,7 +3083,7 @@ paths:
                             businessUnitOrgAreaCode: 2
                             lastUpdatedTimestamp: '2020-06-03'
                             lastUpdatedUser: HRM DATA
-                            storeCode3: N
+                            storeCode3: 'N'
                             reportCode: WK
                             deleteCode: A
                             shrinkPctCost: 0
@@ -2969,7 +3150,7 @@ paths:
                             businessUnitOrgAreaCode: 2
                             lastUpdatedTimestamp: '2020-06-03'
                             lastUpdatedUser: HRM DATA
-                            storeCode3: N
+                            storeCode3: 'N'
                             companyCode: WR
                             taxReportCode: 310
                             reportCode: WR
@@ -2978,33 +3159,35 @@ paths:
                             shrinkRetailPct: 0
                         associates:
                           - firstName: JOSEPH
-                            lastName: " CLAREY"
+                            lastName: ' CLAREY'
                             role: MGMT-STORE MANAGER
                             email: J0C04I9.S01526.US@WAL-MART.COM
                             fullName: JOSEPH CLAREY
                           - firstName: LISA DE
-                            lastName: " BOER"
+                            lastName: ' BOER'
                             role: MGMT-MARKET MANAGER
                             email: LDEBOER@WALMART.COM
                             fullName: LISA DE BOER
                           - firstName: GREGORY
-                            lastName: " LUNDELL"
+                            lastName: ' LUNDELL'
                             role: MGMT-REGIONAL MANAGER - AP
                             email: GREGORY.LUNDELL@WALMART.COM
                             fullName: GREGORY LUNDELL
                         mainWarehouse: 6009
                         lastUpdatedDate: '2020-10-01'
                         lastUpdatedTimestamp: '2020-09-29'
-          description: Successfully returns Stores information for the given country
-            code and department number.
+          description: >-
+            Successfully returns Stores information for the given country code
+            and department number.
         '204':
-          description: No Content is returned when there is no data for the given
-            country code and department number.
+          description: >-
+            No Content is returned when there is no data for the given country
+            code and department number.
         '400':
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
               examples:
                 Department Number -1:
                   value:
@@ -3013,22 +3196,23 @@ paths:
                     error:
                       errorCode: 105
                       message: Department number is invalid
-          description: Bad Request is returned when one or many given criteria are
-            of wrong data type or value.
+          description: >-
+            Bad Request is returned when one or many given criteria are of wrong
+            data type or value.
         '500':
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-          description: Internal Server Error is returned in case there is a connectivity
-            issue with the dependent resource or the dependent resource itself throws
-            some exception.
+                $ref: '#/components/schemas/ErrorResponse'
+          description: >-
+            Internal Server Error is returned in case there is a connectivity
+            issue with the dependent resource or the dependent resource itself
+            throws some exception.
       deprecated: false
       operationId: getLocationsByDepartmentNumberUsingGET
       summary: Fetches all stores information for a given country and department.
-      description: Fetch all stores information using country code and department
-        number.
-  "/{countryCode}/location/divisionNumber/{divisionNumber}":
+      description: Fetch all stores information using country code and department number.
+  '/{countryCode}/location/divisionNumber/{divisionNumber}':
     summary: Represents all stores information in a country and in a division.
     description: Represents all stores information in a country and in a division.
     get:
@@ -3047,7 +3231,7 @@ paths:
             USA:
               value: US
           name: countryCode
-          description: Standard country code. Example US = USA, CA = Canada
+          description: 'Standard country code. Example US = USA, CA = Canada'
           schema:
             type: string
           in: path
@@ -3063,8 +3247,9 @@ paths:
           in: path
           required: true
         - name: f
-          description: 'Comma separated list of fields that will be returned in the
-          response. For example: f=locationNbr,name'
+          description: >-
+            Comma separated list of fields that will be returned in the
+            response. For example: f=locationNbr,name
           schema:
             type: string
           in: query
@@ -3077,25 +3262,28 @@ paths:
           in: query
           required: false
         - name: offset
-          description: Zero based index of number of records to skip from start. If
-            not mentioned, it is considered zero.
+          description: >-
+            Zero based index of number of records to skip from start. If not
+            mentioned, it is considered zero.
           schema:
             format: int64
             type: integer
           in: query
           required: false
         - name: page
-          description: Results page you want to retrieve (0..N). If offset is specified,
-            it will be considered too. If not specified, all pages in the result set
-            will be considered.
+          description: >-
+            Results page you want to retrieve (0..N). If offset is specified, it
+            will be considered too. If not specified, all pages in the result
+            set will be considered.
           schema:
             format: int32
             type: integer
           in: query
           required: false
         - name: pageNumber
-          description: Zero based index of page to fetch. If offset is provided, that
-            too will be considered.
+          description: >-
+            Zero based index of page to fetch. If offset is provided, that too
+            will be considered.
           schema:
             format: int32
             type: integer
@@ -3124,8 +3312,9 @@ paths:
         - style: form
           explode: true
           name: sort
-          description: 'Sorting criteria in the format: property(,asc|desc). Default
-          sort order is ascending. Multiple sort criteria are supported.'
+          description: >-
+            Sorting criteria in the format: property(,asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
           schema:
             type: array
             items:
@@ -3133,8 +3322,9 @@ paths:
           in: query
           required: false
         - name: sort.sorted
-          description: If passed 'true', the sorting criteria mentioned in parameter
-            'sort' is applied.
+          description: >-
+            If passed 'true', the sorting criteria mentioned in parameter 'sort'
+            is applied.
           schema:
             type: boolean
           in: query
@@ -3153,13 +3343,23 @@ paths:
             Name of the producer application:
               value: AP-FDS-LOCATIONS-API
           name: WM_SVC.NAME
-          description: "Unique name ( application key name) of the producer application
-          as registered in the service registry portal \n( https://reg.soa.walmart.com).\nConsumer
-          applications have to get a subscription to this producer application in
-          the service registry portal.\nThe actual producer application will have
-          a sidecar deployment of service mesh proxy along with it.\nHence all the
-          consumers need to pass the mandatory headers and get authorization and authentication
-          to reach the application.\n\nThis header is required in all the environments."
+          description: >-
+            Unique name ( application key name) of the producer application as
+            registered in the service registry portal
+
+            ( https://reg.soa.walmart.com).
+
+            Consumer applications have to get a subscription to this producer
+            application in the service registry portal.
+
+            The actual producer application will have a sidecar deployment of
+            service mesh proxy along with it.
+
+            Hence all the consumers need to pass the mandatory headers and get
+            authorization and authentication to reach the application.
+
+
+            This header is required in all the environments.
           schema:
             type: string
           in: header
@@ -3168,13 +3368,26 @@ paths:
             Environment name of the producer application:
               value: prod
           name: WM_SVC.ENV
-          description: |
-            Name of the environment of the producer application in the service registry portal to which consumer application is subscribed to.
-            For each environment which has to be deployed, an environment is created in service registry portal and same is used to configure the sidecar proxy deployment.
-            As the subscription in service mesh is environment specific; this is a mandatory parameter in all the environments.
+          description: >
+            Name of the environment of the producer application in the service
+            registry portal to which consumer application is subscribed to.
+
+            For each environment which has to be deployed, an environment is
+            created in service registry portal and same is used to configure the
+            sidecar proxy deployment.
+
+            As the subscription in service mesh is environment specific; this is
+            a mandatory parameter in all the environments.
+
 
             Note:
-            Consumers have to pass enviroments according to their subscription. For example if the dev environment of the consumer application is having a subscription to stage environment of the producer application; then only from dev environment of the consumer application stage environment of the producer can be called by passing the WM_SVC.ENV value as stage.
+
+            Consumers have to pass enviroments according to their subscription.
+            For example if the dev environment of the consumer application is
+            having a subscription to stage environment of the producer
+            application; then only from dev environment of the consumer
+            application stage environment of the producer can be called by
+            passing the WM_SVC.ENV value as stage.
           schema:
             type: string
           in: header
@@ -3183,15 +3396,28 @@ paths:
             Consumer Id of consumer application in a specific environment:
               value: 3fa1e5b2-6c55-4d0f-8ae5-634dbbb723432
           name: WM_CONSUMER.ID
-          description: |
-            Consumer Id in the consumer application from which it has a subscription to the environment (value of WM_SVC.ENV) of the producer application.
+          description: >
+            Consumer Id in the consumer application from which it has a
+            subscription to the environment (value of WM_SVC.ENV) of the
+            producer application.
 
-            Consumer Id can be created in the service registry portal with ssh public key.
+
+            Consumer Id can be created in the service registry portal with ssh
+            public key.
+
             A unique string will be generated for the given public key.
 
-            If a consumer application in dev environment(with consumer Id = 3fa1e5b2-6c55-4d0f-8ae5-634dbbb723242) have a subscription to stage environment of the producer application ( AP-FDS-LOCATIONS-API), then there will be an entry created in the service registry database as AP-FDS-LOCATIONS-API/stage/3fa1e5b2-6c55-4d0f-8ae5-634dbbb723242
 
-            Hence when the consumer pass these 3 headers, it will match with the entry in the database; hence the request will be authorized.
+            If a consumer application in dev environment(with consumer Id =
+            3fa1e5b2-6c55-4d0f-8ae5-634dbbb723242) have a subscription to stage
+            environment of the producer application ( AP-FDS-LOCATIONS-API),
+            then there will be an entry created in the service registry database
+            as AP-FDS-LOCATIONS-API/stage/3fa1e5b2-6c55-4d0f-8ae5-634dbbb723242
+
+
+            Hence when the consumer pass these 3 headers, it will match with the
+            entry in the database; hence the request will be authorized.
+
 
             This is a mandatory header in all the environments.
           schema:
@@ -3202,11 +3428,14 @@ paths:
             Version of the consumer Id:
               value: '1'
           name: WM_SEC.KEY_VERSION
-          description: |-
+          description: >-
             Key version of the consumer Id as per the service registry portal.
+
             This is autogenerated field when consumer Id is created.
 
-            This is a mandatory header in stage & prod environments as the signature authentication is in place.
+
+            This is a mandatory header in stage & prod environments as the
+            signature authentication is in place.
           schema:
             type: integer
           in: header
@@ -3215,27 +3444,42 @@ paths:
             Timestamp at the time of signature generation:
               value: '1596901065233'
           name: WM_CONSUMER.INTIMESTAMP
-          description: |-
+          description: >-
             Timestamp in epoch at the time of signature generation.
-            As the generated signature expires every 5 mins, timestamp field has to be passed with the signature for the validation.
 
-            This is a mandatory field for stage & prod environments as the signature authentication is in place.
+            As the generated signature expires every 5 mins, timestamp field has
+            to be passed with the signature for the validation.
+
+
+            This is a mandatory field for stage & prod environments as the
+            signature authentication is in place.
           schema:
             type: integer
           in: header
           required: true
         - examples:
             Sample signature:
-              value: jMXoVjlgcSTwSifCzQ1CM88/ZtzIG49Ec2xy5yUWKfh/42+XN8U9ROd/kj6W/kRqWoU+vtZQrkSovyaV6WkxqK62AGjqXmiVqcyfRZmmrOne80QlrJ2j7MjXv+rhoYf0qvGCTu1S3xMsLN3rh0FtoM4v6TO/Iy7C+RqOxCx7C39NWzsfQlzix7WdxRk59ancuULqo3bL5fF2JfjubLDoD5zahtIBF1amDJFco/e1MOQ1Zamf6HGxMZI20epq0m1CCcEGhFh+kDpniyKbPVsG5EEaAmrCMpvGvrk4ZR+lKvb3J1Flkt4dmDYgknoR1QVqEH9vx6LAZef6phM46aTFiQ==
+              value: >-
+                jMXoVjlgcSTwSifCzQ1CM88/ZtzIG49Ec2xy5yUWKfh/42+XN8U9ROd/kj6W/kRqWoU+vtZQrkSovyaV6WkxqK62AGjqXmiVqcyfRZmmrOne80QlrJ2j7MjXv+rhoYf0qvGCTu1S3xMsLN3rh0FtoM4v6TO/Iy7C+RqOxCx7C39NWzsfQlzix7WdxRk59ancuULqo3bL5fF2JfjubLDoD5zahtIBF1amDJFco/e1MOQ1Zamf6HGxMZI20epq0m1CCcEGhFh+kDpniyKbPVsG5EEaAmrCMpvGvrk4ZR+lKvb3J1Flkt4dmDYgknoR1QVqEH9vx6LAZef6phM46aTFiQ==
           name: WM_SEC.AUTH_SIGNATURE
-          description: |-
+          description: >-
             Generated signature for authentication.
-            Signature is generated based on private key, consumer Id and the key version.
 
-            As the public key is available in service registry portal ( as we have generated consumer Id by submitting ssh public key), generated signature will be decoded by public key and validated using RSA algorithm.
-            Signature will be valid for 5 mins, so that after every 5 mins signature should be regenerated for the new requests.
+            Signature is generated based on private key, consumer Id and the key
+            version.
 
-            This is a mandatory header to be passed in stage & prod environments as the signature authetication is in place.
+
+            As the public key is available in service registry portal ( as we
+            have generated consumer Id by submitting ssh public key), generated
+            signature will be decoded by public key and validated using RSA
+            algorithm.
+
+            Signature will be valid for 5 mins, so that after every 5 mins
+            signature should be regenerated for the new requests.
+
+
+            This is a mandatory header to be passed in stage & prod environments
+            as the signature authetication is in place.
           schema:
             type: string
           in: header
@@ -3245,7 +3489,7 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/LocationResponse"
+                $ref: '#/components/schemas/LocationResponse'
               examples:
                 Division Number 3:
                   value:
@@ -3266,13 +3510,13 @@ paths:
                         timeZoneId: America/Chicago
                         timeZoneCode: CDT
                         glnNumbers:
-                          - '0078742014937'
+                          - 0078742014937
                         timeZoneDSTObservable: true
                         logisticalCountryCode: US
                         type: Retail
                         typeCode: 100001
                         statusCode: 5
-                        status: OLD, MORE THAN 13 MONTHS SINCE RE-GRAND
+                        status: 'OLD, MORE THAN 13 MONTHS SINCE RE-GRAND'
                         buID: 295634
                         tempStoreFlag: false
                         languageCode: 101
@@ -3370,11 +3614,11 @@ paths:
                               - departmentNbr: 30
                                 departmentDesc: FOUNDATIONS
                               - departmentNbr: 31
-                                departmentDesc: FASHION, ACCESS & LUGGAGE
+                                departmentDesc: 'FASHION, ACCESS & LUGGAGE'
                               - departmentNbr: 33
                                 departmentDesc: GIRLS WEAR
                               - departmentNbr: 34
-                                departmentDesc: MISSY, ACTIVE & JUNIOR APPAREL
+                                departmentDesc: 'MISSY, ACTIVE & JUNIOR APPAREL'
                               - departmentNbr: 35
                                 departmentDesc: PLUS SIZES/MATERNITY
                               - departmentNbr: 36
@@ -3386,7 +3630,7 @@ paths:
                               - departmentNbr: 56
                                 departmentDesc: LIVE PLANTS
                               - departmentNbr: 60
-                                departmentDesc: STAMPS, BUILD A BEAR, KIDS CONNECT
+                                departmentDesc: 'STAMPS, BUILD A BEAR, KIDS CONNECT'
                               - departmentNbr: 67
                                 departmentDesc: CELEBRATION
                               - departmentNbr: 69
@@ -3488,7 +3732,7 @@ paths:
                             businessUnitOrgAreaCode: 99
                             lastUpdatedTimestamp: '2020-06-03'
                             lastUpdatedUser: HRM DATA
-                            storeCode3: N
+                            storeCode3: 'N'
                             companyCode: WMW
                             taxReportCode: 110
                             reportCode: SC
@@ -3546,7 +3790,7 @@ paths:
                             shrinkRetailPct: 0
                             departments:
                               - departmentNbr: 32
-                                departmentDesc: JEWELRY, SUNGLASSES
+                                departmentDesc: 'JEWELRY, SUNGLASSES'
                               - departmentNbr: 47
                                 departmentDesc: JEWELRY
                           - divisionNbr: 15
@@ -3710,7 +3954,7 @@ paths:
                             shrinkRetailPct: 0
                             departments:
                               - departmentNbr: 1
-                                departmentDesc: CANDY, TOBACCO
+                                departmentDesc: 'CANDY, TOBACCO'
                               - departmentNbr: 92
                                 departmentDesc: GROCERY
                               - departmentNbr: 95
@@ -3787,7 +4031,7 @@ paths:
                             businessUnitOrgAreaCode: 2
                             lastUpdatedTimestamp: '2020-06-03'
                             lastUpdatedUser: HRM DATA
-                            storeCode3: N
+                            storeCode3: 'N'
                             reportCode: WK
                             deleteCode: A
                             shrinkPctCost: 0
@@ -3854,7 +4098,7 @@ paths:
                             businessUnitOrgAreaCode: 2
                             lastUpdatedTimestamp: '2020-06-03'
                             lastUpdatedUser: HRM DATA
-                            storeCode3: N
+                            storeCode3: 'N'
                             companyCode: WR
                             taxReportCode: 310
                             reportCode: WR
@@ -3863,33 +4107,35 @@ paths:
                             shrinkRetailPct: 0
                         associates:
                           - firstName: JOSEPH
-                            lastName: " CLAREY"
+                            lastName: ' CLAREY'
                             role: MGMT-STORE MANAGER
                             email: J0C04I9.S01526.US@WAL-MART.COM
                             fullName: JOSEPH CLAREY
                           - firstName: LISA DE
-                            lastName: " BOER"
+                            lastName: ' BOER'
                             role: MGMT-MARKET MANAGER
                             email: LDEBOER@WALMART.COM
                             fullName: LISA DE BOER
                           - firstName: GREGORY
-                            lastName: " LUNDELL"
+                            lastName: ' LUNDELL'
                             role: MGMT-REGIONAL MANAGER - AP
                             email: GREGORY.LUNDELL@WALMART.COM
                             fullName: GREGORY LUNDELL
                         mainWarehouse: 6009
                         lastUpdatedDate: '2020-10-01'
                         lastUpdatedTimestamp: '2020-09-29'
-          description: Successfully returns Stores information for the given country
-            code and division number.
+          description: >-
+            Successfully returns Stores information for the given country code
+            and division number.
         '204':
-          description: No Content is returned when there is no data for the given
-            country code and division number.
+          description: >-
+            No Content is returned when there is no data for the given country
+            code and division number.
         '400':
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
               examples:
                 Division Number -1:
                   value:
@@ -3898,22 +4144,25 @@ paths:
                     error:
                       errorCode: 105
                       message: Division number is invalid
-          description: Bad Request is returned when one or many given criteria are
-            of wrong data type or value.
+          description: >-
+            Bad Request is returned when one or many given criteria are of wrong
+            data type or value.
         '500':
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-          description: Internal Server Error is returned in case there is a connectivity
-            issue with the dependent resource or the dependent resource itself throws
-            some exception.
+                $ref: '#/components/schemas/ErrorResponse'
+          description: >-
+            Internal Server Error is returned in case there is a connectivity
+            issue with the dependent resource or the dependent resource itself
+            throws some exception.
       deprecated: false
       operationId: getLocationsByDivisionNumberUsingGET
       summary: Gets all stores information for given country and division
-      description: Fetch all stores information using given country code and division
+      description: >-
+        Fetch all stores information using given country code and division
         number.
-  "/{countryCode}/location/glnNumber/{glnNumber}":
+  '/{countryCode}/location/glnNumber/{glnNumber}':
     summary: Represents a store information in a country and for given GIN number.
     description: Represents a store information in a country and for given GIN number.
     get:
@@ -3926,21 +4175,22 @@ paths:
             USA:
               value: US
           name: countryCode
-          description: Standard country code. Example US = USA, CA = Canada
+          description: 'Standard country code. Example US = USA, CA = Canada'
           schema:
             type: string
           in: path
           required: true
         - name: f
-          description: 'Optional. Comma separated list of fields that will be returned
-          in the response. For example: f=locationNbr,name'
+          description: >-
+            Optional. Comma separated list of fields that will be returned in
+            the response. For example: f=locationNbr,name
           schema:
             type: string
           in: query
           required: false
         - examples:
             GLN Number:
-              value: '0078742068855'
+              value: 0078742068855
           name: glnNumber
           description: GIN number
           schema:
@@ -3951,13 +4201,23 @@ paths:
             Name of the producer application:
               value: AP-FDS-LOCATIONS-API
           name: WM_SVC.NAME
-          description: "Unique name ( application key name) of the producer application
-          as registered in the service registry portal \n( https://reg.soa.walmart.com).\nConsumer
-          applications have to get a subscription to this producer application in
-          the service registry portal.\nThe actual producer application will have
-          a sidecar deployment of service mesh proxy along with it.\nHence all the
-          consumers need to pass the mandatory headers and get authorization and authentication
-          to reach the application.\n\nThis header is required in all the environments."
+          description: >-
+            Unique name ( application key name) of the producer application as
+            registered in the service registry portal
+
+            ( https://reg.soa.walmart.com).
+
+            Consumer applications have to get a subscription to this producer
+            application in the service registry portal.
+
+            The actual producer application will have a sidecar deployment of
+            service mesh proxy along with it.
+
+            Hence all the consumers need to pass the mandatory headers and get
+            authorization and authentication to reach the application.
+
+
+            This header is required in all the environments.
           schema:
             type: string
           in: header
@@ -3966,13 +4226,26 @@ paths:
             Environment name of the producer application:
               value: prod
           name: WM_SVC.ENV
-          description: |
-            Name of the environment of the producer application in the service registry portal to which consumer application is subscribed to.
-            For each environment which has to be deployed, an environment is created in service registry portal and same is used to configure the sidecar proxy deployment.
-            As the subscription in service mesh is environment specific; this is a mandatory parameter in all the environments.
+          description: >
+            Name of the environment of the producer application in the service
+            registry portal to which consumer application is subscribed to.
+
+            For each environment which has to be deployed, an environment is
+            created in service registry portal and same is used to configure the
+            sidecar proxy deployment.
+
+            As the subscription in service mesh is environment specific; this is
+            a mandatory parameter in all the environments.
+
 
             Note:
-            Consumers have to pass enviroments according to their subscription. For example if the dev environment of the consumer application is having a subscription to stage environment of the producer application; then only from dev environment of the consumer application stage environment of the producer can be called by passing the WM_SVC.ENV value as stage.
+
+            Consumers have to pass enviroments according to their subscription.
+            For example if the dev environment of the consumer application is
+            having a subscription to stage environment of the producer
+            application; then only from dev environment of the consumer
+            application stage environment of the producer can be called by
+            passing the WM_SVC.ENV value as stage.
           schema:
             type: string
           in: header
@@ -3981,15 +4254,28 @@ paths:
             Consumer Id of consumer application in a specific environment:
               value: 3fa1e5b2-6c55-4d0f-8ae5-634dbbb723432
           name: WM_CONSUMER.ID
-          description: |
-            Consumer Id in the consumer application from which it has a subscription to the environment (value of WM_SVC.ENV) of the producer application.
+          description: >
+            Consumer Id in the consumer application from which it has a
+            subscription to the environment (value of WM_SVC.ENV) of the
+            producer application.
 
-            Consumer Id can be created in the service registry portal with ssh public key.
+
+            Consumer Id can be created in the service registry portal with ssh
+            public key.
+
             A unique string will be generated for the given public key.
 
-            If a consumer application in dev environment(with consumer Id = 3fa1e5b2-6c55-4d0f-8ae5-634dbbb723242) have a subscription to stage environment of the producer application ( AP-FDS-LOCATIONS-API), then there will be an entry created in the service registry database as AP-FDS-LOCATIONS-API/stage/3fa1e5b2-6c55-4d0f-8ae5-634dbbb723242
 
-            Hence when the consumer pass these 3 headers, it will match with the entry in the database; hence the request will be authorized.
+            If a consumer application in dev environment(with consumer Id =
+            3fa1e5b2-6c55-4d0f-8ae5-634dbbb723242) have a subscription to stage
+            environment of the producer application ( AP-FDS-LOCATIONS-API),
+            then there will be an entry created in the service registry database
+            as AP-FDS-LOCATIONS-API/stage/3fa1e5b2-6c55-4d0f-8ae5-634dbbb723242
+
+
+            Hence when the consumer pass these 3 headers, it will match with the
+            entry in the database; hence the request will be authorized.
+
 
             This is a mandatory header in all the environments.
           schema:
@@ -4000,11 +4286,14 @@ paths:
             Version of the consumer Id:
               value: '1'
           name: WM_SEC.KEY_VERSION
-          description: |-
+          description: >-
             Key version of the consumer Id as per the service registry portal.
+
             This is autogenerated field when consumer Id is created.
 
-            This is a mandatory header in stage & prod environments as the signature authentication is in place.
+
+            This is a mandatory header in stage & prod environments as the
+            signature authentication is in place.
           schema:
             type: integer
           in: header
@@ -4013,27 +4302,42 @@ paths:
             Timestamp at the time of signature generation:
               value: '1596901065233'
           name: WM_CONSUMER.INTIMESTAMP
-          description: |-
+          description: >-
             Timestamp in epoch at the time of signature generation.
-            As the generated signature expires every 5 mins, timestamp field has to be passed with the signature for the validation.
 
-            This is a mandatory field for stage & prod environments as the signature authentication is in place.
+            As the generated signature expires every 5 mins, timestamp field has
+            to be passed with the signature for the validation.
+
+
+            This is a mandatory field for stage & prod environments as the
+            signature authentication is in place.
           schema:
             type: integer
           in: header
           required: true
         - examples:
             Sample signature:
-              value: jMXoVjlgcSTwSifCzQ1CM88/ZtzIG49Ec2xy5yUWKfh/42+XN8U9ROd/kj6W/kRqWoU+vtZQrkSovyaV6WkxqK62AGjqXmiVqcyfRZmmrOne80QlrJ2j7MjXv+rhoYf0qvGCTu1S3xMsLN3rh0FtoM4v6TO/Iy7C+RqOxCx7C39NWzsfQlzix7WdxRk59ancuULqo3bL5fF2JfjubLDoD5zahtIBF1amDJFco/e1MOQ1Zamf6HGxMZI20epq0m1CCcEGhFh+kDpniyKbPVsG5EEaAmrCMpvGvrk4ZR+lKvb3J1Flkt4dmDYgknoR1QVqEH9vx6LAZef6phM46aTFiQ==
+              value: >-
+                jMXoVjlgcSTwSifCzQ1CM88/ZtzIG49Ec2xy5yUWKfh/42+XN8U9ROd/kj6W/kRqWoU+vtZQrkSovyaV6WkxqK62AGjqXmiVqcyfRZmmrOne80QlrJ2j7MjXv+rhoYf0qvGCTu1S3xMsLN3rh0FtoM4v6TO/Iy7C+RqOxCx7C39NWzsfQlzix7WdxRk59ancuULqo3bL5fF2JfjubLDoD5zahtIBF1amDJFco/e1MOQ1Zamf6HGxMZI20epq0m1CCcEGhFh+kDpniyKbPVsG5EEaAmrCMpvGvrk4ZR+lKvb3J1Flkt4dmDYgknoR1QVqEH9vx6LAZef6phM46aTFiQ==
           name: WM_SEC.AUTH_SIGNATURE
-          description: |-
+          description: >-
             Generated signature for authentication.
-            Signature is generated based on private key, consumer Id and the key version.
 
-            As the public key is available in service registry portal ( as we have generated consumer Id by submitting ssh public key), generated signature will be decoded by public key and validated using RSA algorithm.
-            Signature will be valid for 5 mins, so that after every 5 mins signature should be regenerated for the new requests.
+            Signature is generated based on private key, consumer Id and the key
+            version.
 
-            This is a mandatory header to be passed in stage & prod environments as the signature authetication is in place.
+
+            As the public key is available in service registry portal ( as we
+            have generated consumer Id by submitting ssh public key), generated
+            signature will be decoded by public key and validated using RSA
+            algorithm.
+
+            Signature will be valid for 5 mins, so that after every 5 mins
+            signature should be regenerated for the new requests.
+
+
+            This is a mandatory header to be passed in stage & prod environments
+            as the signature authetication is in place.
           schema:
             type: string
           in: header
@@ -4043,7 +4347,7 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/LocationSingleResponse"
+                $ref: '#/components/schemas/LocationSingleResponse'
               examples:
                 GLN Number 0078742068855:
                   value:
@@ -4064,13 +4368,13 @@ paths:
                       timeZoneId: America/Chicago
                       timeZoneCode: CDT
                       glnNumbers:
-                        - '0078742068855'
+                        - 0078742068855
                       timeZoneDSTObservable: true
                       logisticalCountryCode: US
                       type: Retail
                       typeCode: 100001
                       statusCode: 2
-                      status: NEW, OPEN 13 MONTHS OR MORE
+                      status: 'NEW, OPEN 13 MONTHS OR MORE'
                       buID: 10262649
                       tempStoreFlag: false
                       languageCode: 101
@@ -4172,13 +4476,13 @@ paths:
                             - departmentNbr: 30
                               departmentDesc: FOUNDATIONS
                             - departmentNbr: 31
-                              departmentDesc: FASHION, ACCESS & LUGGAGE
+                              departmentDesc: 'FASHION, ACCESS & LUGGAGE'
                             - departmentNbr: 32
-                              departmentDesc: JEWELRY, SUNGLASSES
+                              departmentDesc: 'JEWELRY, SUNGLASSES'
                             - departmentNbr: 33
                               departmentDesc: GIRLS WEAR
                             - departmentNbr: 34
-                              departmentDesc: MISSY, ACTIVE & JUNIOR APPAREL
+                              departmentDesc: 'MISSY, ACTIVE & JUNIOR APPAREL'
                             - departmentNbr: 35
                               departmentDesc: PLUS SIZES/MATERNITY
                             - departmentNbr: 36
@@ -4194,7 +4498,7 @@ paths:
                             - departmentNbr: 56
                               departmentDesc: LIVE PLANTS
                             - departmentNbr: 60
-                              departmentDesc: STAMPS, BUILD A BEAR, KIDS CONNECT
+                              departmentDesc: 'STAMPS, BUILD A BEAR, KIDS CONNECT'
                             - departmentNbr: 67
                               departmentDesc: CELEBRATION
                             - departmentNbr: 69
@@ -4401,7 +4705,7 @@ paths:
                           shrinkRetailPct: 0
                           departments:
                             - departmentNbr: 1
-                              departmentDesc: CANDY, TOBACCO
+                              departmentDesc: 'CANDY, TOBACCO'
                             - departmentNbr: 92
                               departmentDesc: GROCERY
                             - departmentNbr: 95
@@ -4423,7 +4727,7 @@ paths:
                           businessUnitOrgAreaCode: 3
                           lastUpdatedTimestamp: '2020-06-03'
                           lastUpdatedUser: HRM DATA
-                          storeCode3: N
+                          storeCode3: 'N'
                           companyCode: WMW
                           taxReportCode: 110
                           reportCode: NM
@@ -4453,17 +4757,17 @@ paths:
                           shrinkRetailPct: 0
                       associates:
                         - firstName: BRAD
-                          lastName: " SHERWOOD"
+                          lastName: ' SHERWOOD'
                           role: MGMT-STORE MANAGER
                           email: B0S01CF.S00998.US@WAL-MART.COM
                           fullName: BRAD SHERWOOD
                         - firstName: MATTHEW
-                          lastName: " HARRELL"
+                          lastName: ' HARRELL'
                           role: MGMT-MARKET MANAGER
                           email: MATTHEW.HARRELL@WALMART.COM
                           fullName: MATTHEW HARRELL
                         - firstName: CYNTHIA
-                          lastName: " PERRON"
+                          lastName: ' PERRON'
                           role: MGMT-REGIONAL MANAGER - AP
                           email: CYNTHIA.PERRON@WALMART.COM
                           fullName: CYNTHIA PERRON
@@ -4471,16 +4775,18 @@ paths:
                       lastUpdatedDate: '2020-09-15'
                       centerManaged: 1
                       lastUpdatedTimestamp: '2020-09-09'
-          description: Successfully returns Stores information for the given country
-            code and GLN number.
+          description: >-
+            Successfully returns Stores information for the given country code
+            and GLN number.
         '204':
-          description: No Content is returned when there is no data for the given
-            country code and GLN number.
+          description: >-
+            No Content is returned when there is no data for the given country
+            code and GLN number.
         '400':
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
               examples:
                 Invalid GLN Number:
                   value:
@@ -4489,21 +4795,23 @@ paths:
                     error:
                       errorCode: 105
                       message: gln number is not numeric
-          description: Bad Request is returned when one or many given criteria are
-            of wrong data type or value.
+          description: >-
+            Bad Request is returned when one or many given criteria are of wrong
+            data type or value.
         '500':
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-          description: Internal Server Error is returned in case there is a connectivity
-            issue with the dependent resource or the dependent resource itself throws
-            some exception.
+                $ref: '#/components/schemas/ErrorResponse'
+          description: >-
+            Internal Server Error is returned in case there is a connectivity
+            issue with the dependent resource or the dependent resource itself
+            throws some exception.
       deprecated: false
       operationId: getLocationByGLNNumberUsingGET
       summary: Fetches the store information in a country for given GIN number.
       description: Fetch store information using country code and GLN number.
-  "/{countryCode}/location/locationNumber/{locationNumber}":
+  '/{countryCode}/location/locationNumber/{locationNumber}':
     summary: Represents a particular store information in a country.
     description: Represents a particular store information in a country.
     get:
@@ -4516,14 +4824,15 @@ paths:
             USA:
               value: US
           name: countryCode
-          description: Standard country code. Example US = USA, CA = Canada
+          description: 'Standard country code. Example US = USA, CA = Canada'
           schema:
             type: string
           in: path
           required: true
         - name: f
-          description: 'Optional. Comma separated list of fields that will be returned
-          in the response. For example: f=locationNbr,name'
+          description: >-
+            Optional. Comma separated list of fields that will be returned in
+            the response. For example: f=locationNbr,name
           schema:
             type: string
           in: query
@@ -4542,13 +4851,23 @@ paths:
             Name of the producer application:
               value: AP-FDS-LOCATIONS-API
           name: WM_SVC.NAME
-          description: "Unique name ( application key name) of the producer application
-          as registered in the service registry portal \n( https://reg.soa.walmart.com).\nConsumer
-          applications have to get a subscription to this producer application in
-          the service registry portal.\nThe actual producer application will have
-          a sidecar deployment of service mesh proxy along with it.\nHence all the
-          consumers need to pass the mandatory headers and get authorization and authentication
-          to reach the application.\n\nThis header is required in all the environments."
+          description: >-
+            Unique name ( application key name) of the producer application as
+            registered in the service registry portal
+
+            ( https://reg.soa.walmart.com).
+
+            Consumer applications have to get a subscription to this producer
+            application in the service registry portal.
+
+            The actual producer application will have a sidecar deployment of
+            service mesh proxy along with it.
+
+            Hence all the consumers need to pass the mandatory headers and get
+            authorization and authentication to reach the application.
+
+
+            This header is required in all the environments.
           schema:
             type: string
           in: header
@@ -4557,13 +4876,26 @@ paths:
             Environment name of the producer application:
               value: prod
           name: WM_SVC.ENV
-          description: |
-            Name of the environment of the producer application in the service registry portal to which consumer application is subscribed to.
-            For each environment which has to be deployed, an environment is created in service registry portal and same is used to configure the sidecar proxy deployment.
-            As the subscription in service mesh is environment specific; this is a mandatory parameter in all the environments.
+          description: >
+            Name of the environment of the producer application in the service
+            registry portal to which consumer application is subscribed to.
+
+            For each environment which has to be deployed, an environment is
+            created in service registry portal and same is used to configure the
+            sidecar proxy deployment.
+
+            As the subscription in service mesh is environment specific; this is
+            a mandatory parameter in all the environments.
+
 
             Note:
-            Consumers have to pass enviroments according to their subscription. For example if the dev environment of the consumer application is having a subscription to stage environment of the producer application; then only from dev environment of the consumer application stage environment of the producer can be called by passing the WM_SVC.ENV value as stage.
+
+            Consumers have to pass enviroments according to their subscription.
+            For example if the dev environment of the consumer application is
+            having a subscription to stage environment of the producer
+            application; then only from dev environment of the consumer
+            application stage environment of the producer can be called by
+            passing the WM_SVC.ENV value as stage.
           schema:
             type: string
           in: header
@@ -4572,15 +4904,28 @@ paths:
             Consumer Id of consumer application in a specific environment:
               value: 3fa1e5b2-6c55-4d0f-8ae5-634dbbb723432
           name: WM_CONSUMER.ID
-          description: |
-            Consumer Id in the consumer application from which it has a subscription to the environment (value of WM_SVC.ENV) of the producer application.
+          description: >
+            Consumer Id in the consumer application from which it has a
+            subscription to the environment (value of WM_SVC.ENV) of the
+            producer application.
 
-            Consumer Id can be created in the service registry portal with ssh public key.
+
+            Consumer Id can be created in the service registry portal with ssh
+            public key.
+
             A unique string will be generated for the given public key.
 
-            If a consumer application in dev environment(with consumer Id = 3fa1e5b2-6c55-4d0f-8ae5-634dbbb723242) have a subscription to stage environment of the producer application ( AP-FDS-LOCATIONS-API), then there will be an entry created in the service registry database as AP-FDS-LOCATIONS-API/stage/3fa1e5b2-6c55-4d0f-8ae5-634dbbb723242
 
-            Hence when the consumer pass these 3 headers, it will match with the entry in the database; hence the request will be authorized.
+            If a consumer application in dev environment(with consumer Id =
+            3fa1e5b2-6c55-4d0f-8ae5-634dbbb723242) have a subscription to stage
+            environment of the producer application ( AP-FDS-LOCATIONS-API),
+            then there will be an entry created in the service registry database
+            as AP-FDS-LOCATIONS-API/stage/3fa1e5b2-6c55-4d0f-8ae5-634dbbb723242
+
+
+            Hence when the consumer pass these 3 headers, it will match with the
+            entry in the database; hence the request will be authorized.
+
 
             This is a mandatory header in all the environments.
           schema:
@@ -4591,11 +4936,14 @@ paths:
             Version of the consumer Id:
               value: '1'
           name: WM_SEC.KEY_VERSION
-          description: |-
+          description: >-
             Key version of the consumer Id as per the service registry portal.
+
             This is autogenerated field when consumer Id is created.
 
-            This is a mandatory header in stage & prod environments as the signature authentication is in place.
+
+            This is a mandatory header in stage & prod environments as the
+            signature authentication is in place.
           schema:
             type: integer
           in: header
@@ -4604,27 +4952,42 @@ paths:
             Timestamp at the time of signature generation:
               value: '1596901065233'
           name: WM_CONSUMER.INTIMESTAMP
-          description: |-
+          description: >-
             Timestamp in epoch at the time of signature generation.
-            As the generated signature expires every 5 mins, timestamp field has to be passed with the signature for the validation.
 
-            This is a mandatory field for stage & prod environments as the signature authentication is in place.
+            As the generated signature expires every 5 mins, timestamp field has
+            to be passed with the signature for the validation.
+
+
+            This is a mandatory field for stage & prod environments as the
+            signature authentication is in place.
           schema:
             type: integer
           in: header
           required: true
         - examples:
             Sample signature:
-              value: jMXoVjlgcSTwSifCzQ1CM88/ZtzIG49Ec2xy5yUWKfh/42+XN8U9ROd/kj6W/kRqWoU+vtZQrkSovyaV6WkxqK62AGjqXmiVqcyfRZmmrOne80QlrJ2j7MjXv+rhoYf0qvGCTu1S3xMsLN3rh0FtoM4v6TO/Iy7C+RqOxCx7C39NWzsfQlzix7WdxRk59ancuULqo3bL5fF2JfjubLDoD5zahtIBF1amDJFco/e1MOQ1Zamf6HGxMZI20epq0m1CCcEGhFh+kDpniyKbPVsG5EEaAmrCMpvGvrk4ZR+lKvb3J1Flkt4dmDYgknoR1QVqEH9vx6LAZef6phM46aTFiQ==
+              value: >-
+                jMXoVjlgcSTwSifCzQ1CM88/ZtzIG49Ec2xy5yUWKfh/42+XN8U9ROd/kj6W/kRqWoU+vtZQrkSovyaV6WkxqK62AGjqXmiVqcyfRZmmrOne80QlrJ2j7MjXv+rhoYf0qvGCTu1S3xMsLN3rh0FtoM4v6TO/Iy7C+RqOxCx7C39NWzsfQlzix7WdxRk59ancuULqo3bL5fF2JfjubLDoD5zahtIBF1amDJFco/e1MOQ1Zamf6HGxMZI20epq0m1CCcEGhFh+kDpniyKbPVsG5EEaAmrCMpvGvrk4ZR+lKvb3J1Flkt4dmDYgknoR1QVqEH9vx6LAZef6phM46aTFiQ==
           name: WM_SEC.AUTH_SIGNATURE
-          description: |-
+          description: >-
             Generated signature for authentication.
-            Signature is generated based on private key, consumer Id and the key version.
 
-            As the public key is available in service registry portal ( as we have generated consumer Id by submitting ssh public key), generated signature will be decoded by public key and validated using RSA algorithm.
-            Signature will be valid for 5 mins, so that after every 5 mins signature should be regenerated for the new requests.
+            Signature is generated based on private key, consumer Id and the key
+            version.
 
-            This is a mandatory header to be passed in stage & prod environments as the signature authetication is in place.
+
+            As the public key is available in service registry portal ( as we
+            have generated consumer Id by submitting ssh public key), generated
+            signature will be decoded by public key and validated using RSA
+            algorithm.
+
+            Signature will be valid for 5 mins, so that after every 5 mins
+            signature should be regenerated for the new requests.
+
+
+            This is a mandatory header to be passed in stage & prod environments
+            as the signature authetication is in place.
           schema:
             type: string
           in: header
@@ -4634,7 +4997,7 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/LocationSingleResponse"
+                $ref: '#/components/schemas/LocationSingleResponse'
               examples:
                 Location Number 998:
                   value:
@@ -4655,13 +5018,13 @@ paths:
                       timeZoneId: America/Chicago
                       timeZoneCode: CDT
                       glnNumbers:
-                        - '0078742068855'
+                        - 0078742068855
                       timeZoneDSTObservable: true
                       logisticalCountryCode: US
                       type: Retail
                       typeCode: 100001
                       statusCode: 2
-                      status: NEW, OPEN 13 MONTHS OR MORE
+                      status: 'NEW, OPEN 13 MONTHS OR MORE'
                       buID: 10262649
                       tempStoreFlag: false
                       languageCode: 101
@@ -4763,13 +5126,13 @@ paths:
                             - departmentNbr: 30
                               departmentDesc: FOUNDATIONS
                             - departmentNbr: 31
-                              departmentDesc: FASHION, ACCESS & LUGGAGE
+                              departmentDesc: 'FASHION, ACCESS & LUGGAGE'
                             - departmentNbr: 32
-                              departmentDesc: JEWELRY, SUNGLASSES
+                              departmentDesc: 'JEWELRY, SUNGLASSES'
                             - departmentNbr: 33
                               departmentDesc: GIRLS WEAR
                             - departmentNbr: 34
-                              departmentDesc: MISSY, ACTIVE & JUNIOR APPAREL
+                              departmentDesc: 'MISSY, ACTIVE & JUNIOR APPAREL'
                             - departmentNbr: 35
                               departmentDesc: PLUS SIZES/MATERNITY
                             - departmentNbr: 36
@@ -4785,7 +5148,7 @@ paths:
                             - departmentNbr: 56
                               departmentDesc: LIVE PLANTS
                             - departmentNbr: 60
-                              departmentDesc: STAMPS, BUILD A BEAR, KIDS CONNECT
+                              departmentDesc: 'STAMPS, BUILD A BEAR, KIDS CONNECT'
                             - departmentNbr: 67
                               departmentDesc: CELEBRATION
                             - departmentNbr: 69
@@ -4992,7 +5355,7 @@ paths:
                           shrinkRetailPct: 0
                           departments:
                             - departmentNbr: 1
-                              departmentDesc: CANDY, TOBACCO
+                              departmentDesc: 'CANDY, TOBACCO'
                             - departmentNbr: 92
                               departmentDesc: GROCERY
                             - departmentNbr: 95
@@ -5014,7 +5377,7 @@ paths:
                           businessUnitOrgAreaCode: 3
                           lastUpdatedTimestamp: '2020-06-03'
                           lastUpdatedUser: HRM DATA
-                          storeCode3: N
+                          storeCode3: 'N'
                           companyCode: WMW
                           taxReportCode: 110
                           reportCode: NM
@@ -5044,17 +5407,17 @@ paths:
                           shrinkRetailPct: 0
                       associates:
                         - firstName: BRAD
-                          lastName: " SHERWOOD"
+                          lastName: ' SHERWOOD'
                           role: MGMT-STORE MANAGER
                           email: B0S01CF.S00998.US@WAL-MART.COM
                           fullName: BRAD SHERWOOD
                         - firstName: MATTHEW
-                          lastName: " HARRELL"
+                          lastName: ' HARRELL'
                           role: MGMT-MARKET MANAGER
                           email: MATTHEW.HARRELL@WALMART.COM
                           fullName: MATTHEW HARRELL
                         - firstName: CYNTHIA
-                          lastName: " PERRON"
+                          lastName: ' PERRON'
                           role: MGMT-REGIONAL MANAGER - AP
                           email: CYNTHIA.PERRON@WALMART.COM
                           fullName: CYNTHIA PERRON
@@ -5062,16 +5425,18 @@ paths:
                       lastUpdatedDate: '2020-09-15'
                       centerManaged: 1
                       lastUpdatedTimestamp: '2020-09-09'
-          description: Successfully returns Stores information for the given country
-            code and location number.
+          description: >-
+            Successfully returns Stores information for the given country code
+            and location number.
         '204':
-          description: No Content is returned when there is no data for the given
-            country code and location number.
+          description: >-
+            No Content is returned when there is no data for the given country
+            code and location number.
         '400':
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
               examples:
                 Invalid Location Number:
                   value:
@@ -5080,22 +5445,25 @@ paths:
                     error:
                       errorCode: 105
                       message: Location number is invalid
-          description: Bad Request is returned when one or many given criteria are
-            of wrong data type or value.
+          description: >-
+            Bad Request is returned when one or many given criteria are of wrong
+            data type or value.
         '500':
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-          description: Internal Server Error is returned in case there is a connectivity
-            issue with the dependent resource or the dependent resource itself throws
-            some exception.
+                $ref: '#/components/schemas/ErrorResponse'
+          description: >-
+            Internal Server Error is returned in case there is a connectivity
+            issue with the dependent resource or the dependent resource itself
+            throws some exception.
       deprecated: false
       operationId: getLocationByNumberUsingGET
       summary: Fetches a particular store information in a country.
-      description: Fetches a particular store information based on country code and
+      description: >-
+        Fetches a particular store information based on country code and
         location number.
-  "/{countryCode}/location/locationTypeCode/{locationTypeCode}":
+  '/{countryCode}/location/locationTypeCode/{locationTypeCode}':
     summary: Represents stores in a country that are of a particular type.
     description: Represents stores in a country that are of a particular type.
     get:
@@ -5108,14 +5476,15 @@ paths:
             USA:
               value: US
           name: countryCode
-          description: Standard country code. Example US = USA, CA = Canada
+          description: 'Standard country code. Example US = USA, CA = Canada'
           schema:
             type: string
           in: path
           required: true
         - name: f
-          description: 'Comma separated list of fields that will be returned in the
-          response. For example: f=locationNbr,name'
+          description: >-
+            Comma separated list of fields that will be returned in the
+            response. For example: f=locationNbr,name
           schema:
             type: string
           in: query
@@ -5131,25 +5500,28 @@ paths:
           in: path
           required: true
         - name: offset
-          description: Zero based index of number of records to skip from start. If
-            not mentioned, it is considered zero.
+          description: >-
+            Zero based index of number of records to skip from start. If not
+            mentioned, it is considered zero.
           schema:
             format: int64
             type: integer
           in: query
           required: false
         - name: page
-          description: Results page you want to retrieve (0..N). If offset is specified,
-            it will be considered too. If not specified, all pages in the result set
-            will be considered.
+          description: >-
+            Results page you want to retrieve (0..N). If offset is specified, it
+            will be considered too. If not specified, all pages in the result
+            set will be considered.
           schema:
             format: int32
             type: integer
           in: query
           required: false
         - name: pageNumber
-          description: Zero based index of page to fetch. If offset is provided, that
-            too will be considered.
+          description: >-
+            Zero based index of page to fetch. If offset is provided, that too
+            will be considered.
           schema:
             format: int32
             type: integer
@@ -5178,8 +5550,9 @@ paths:
         - style: form
           explode: true
           name: sort
-          description: 'Sorting criteria in the format: property(,asc|desc). Default
-          sort order is ascending. Multiple sort criteria are supported.'
+          description: >-
+            Sorting criteria in the format: property(,asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
           schema:
             type: array
             items:
@@ -5187,8 +5560,9 @@ paths:
           in: query
           required: false
         - name: sort.sorted
-          description: If passed 'true', the sorting criteria mentioned in parameter
-            'sort' is applied.
+          description: >-
+            If passed 'true', the sorting criteria mentioned in parameter 'sort'
+            is applied.
           schema:
             type: boolean
           in: query
@@ -5207,13 +5581,23 @@ paths:
             Name of the producer application:
               value: AP-FDS-LOCATIONS-API
           name: WM_SVC.NAME
-          description: "Unique name ( application key name) of the producer application
-          as registered in the service registry portal \n( https://reg.soa.walmart.com).\nConsumer
-          applications have to get a subscription to this producer application in
-          the service registry portal.\nThe actual producer application will have
-          a sidecar deployment of service mesh proxy along with it.\nHence all the
-          consumers need to pass the mandatory headers and get authorization and authentication
-          to reach the application.\n\nThis header is required in all the environments."
+          description: >-
+            Unique name ( application key name) of the producer application as
+            registered in the service registry portal
+
+            ( https://reg.soa.walmart.com).
+
+            Consumer applications have to get a subscription to this producer
+            application in the service registry portal.
+
+            The actual producer application will have a sidecar deployment of
+            service mesh proxy along with it.
+
+            Hence all the consumers need to pass the mandatory headers and get
+            authorization and authentication to reach the application.
+
+
+            This header is required in all the environments.
           schema:
             type: string
           in: header
@@ -5222,13 +5606,26 @@ paths:
             Environment name of the producer application:
               value: prod
           name: WM_SVC.ENV
-          description: |
-            Name of the environment of the producer application in the service registry portal to which consumer application is subscribed to.
-            For each environment which has to be deployed, an environment is created in service registry portal and same is used to configure the sidecar proxy deployment.
-            As the subscription in service mesh is environment specific; this is a mandatory parameter in all the environments.
+          description: >
+            Name of the environment of the producer application in the service
+            registry portal to which consumer application is subscribed to.
+
+            For each environment which has to be deployed, an environment is
+            created in service registry portal and same is used to configure the
+            sidecar proxy deployment.
+
+            As the subscription in service mesh is environment specific; this is
+            a mandatory parameter in all the environments.
+
 
             Note:
-            Consumers have to pass enviroments according to their subscription. For example if the dev environment of the consumer application is having a subscription to stage environment of the producer application; then only from dev environment of the consumer application stage environment of the producer can be called by passing the WM_SVC.ENV value as stage.
+
+            Consumers have to pass enviroments according to their subscription.
+            For example if the dev environment of the consumer application is
+            having a subscription to stage environment of the producer
+            application; then only from dev environment of the consumer
+            application stage environment of the producer can be called by
+            passing the WM_SVC.ENV value as stage.
           schema:
             type: string
           in: header
@@ -5237,15 +5634,28 @@ paths:
             Consumer Id of consumer application in a specific environment:
               value: 3fa1e5b2-6c55-4d0f-8ae5-634dbbb723432
           name: WM_CONSUMER.ID
-          description: |
-            Consumer Id in the consumer application from which it has a subscription to the environment (value of WM_SVC.ENV) of the producer application.
+          description: >
+            Consumer Id in the consumer application from which it has a
+            subscription to the environment (value of WM_SVC.ENV) of the
+            producer application.
 
-            Consumer Id can be created in the service registry portal with ssh public key.
+
+            Consumer Id can be created in the service registry portal with ssh
+            public key.
+
             A unique string will be generated for the given public key.
 
-            If a consumer application in dev environment(with consumer Id = 3fa1e5b2-6c55-4d0f-8ae5-634dbbb723242) have a subscription to stage environment of the producer application ( AP-FDS-LOCATIONS-API), then there will be an entry created in the service registry database as AP-FDS-LOCATIONS-API/stage/3fa1e5b2-6c55-4d0f-8ae5-634dbbb723242
 
-            Hence when the consumer pass these 3 headers, it will match with the entry in the database; hence the request will be authorized.
+            If a consumer application in dev environment(with consumer Id =
+            3fa1e5b2-6c55-4d0f-8ae5-634dbbb723242) have a subscription to stage
+            environment of the producer application ( AP-FDS-LOCATIONS-API),
+            then there will be an entry created in the service registry database
+            as AP-FDS-LOCATIONS-API/stage/3fa1e5b2-6c55-4d0f-8ae5-634dbbb723242
+
+
+            Hence when the consumer pass these 3 headers, it will match with the
+            entry in the database; hence the request will be authorized.
+
 
             This is a mandatory header in all the environments.
           schema:
@@ -5256,11 +5666,14 @@ paths:
             Version of the consumer Id:
               value: '1'
           name: WM_SEC.KEY_VERSION
-          description: |-
+          description: >-
             Key version of the consumer Id as per the service registry portal.
+
             This is autogenerated field when consumer Id is created.
 
-            This is a mandatory header in stage & prod environments as the signature authentication is in place.
+
+            This is a mandatory header in stage & prod environments as the
+            signature authentication is in place.
           schema:
             type: integer
           in: header
@@ -5269,27 +5682,42 @@ paths:
             Timestamp at the time of signature generation:
               value: '1596901065233'
           name: WM_CONSUMER.INTIMESTAMP
-          description: |-
+          description: >-
             Timestamp in epoch at the time of signature generation.
-            As the generated signature expires every 5 mins, timestamp field has to be passed with the signature for the validation.
 
-            This is a mandatory field for stage & prod environments as the signature authentication is in place.
+            As the generated signature expires every 5 mins, timestamp field has
+            to be passed with the signature for the validation.
+
+
+            This is a mandatory field for stage & prod environments as the
+            signature authentication is in place.
           schema:
             type: integer
           in: header
           required: true
         - examples:
             Sample signature:
-              value: jMXoVjlgcSTwSifCzQ1CM88/ZtzIG49Ec2xy5yUWKfh/42+XN8U9ROd/kj6W/kRqWoU+vtZQrkSovyaV6WkxqK62AGjqXmiVqcyfRZmmrOne80QlrJ2j7MjXv+rhoYf0qvGCTu1S3xMsLN3rh0FtoM4v6TO/Iy7C+RqOxCx7C39NWzsfQlzix7WdxRk59ancuULqo3bL5fF2JfjubLDoD5zahtIBF1amDJFco/e1MOQ1Zamf6HGxMZI20epq0m1CCcEGhFh+kDpniyKbPVsG5EEaAmrCMpvGvrk4ZR+lKvb3J1Flkt4dmDYgknoR1QVqEH9vx6LAZef6phM46aTFiQ==
+              value: >-
+                jMXoVjlgcSTwSifCzQ1CM88/ZtzIG49Ec2xy5yUWKfh/42+XN8U9ROd/kj6W/kRqWoU+vtZQrkSovyaV6WkxqK62AGjqXmiVqcyfRZmmrOne80QlrJ2j7MjXv+rhoYf0qvGCTu1S3xMsLN3rh0FtoM4v6TO/Iy7C+RqOxCx7C39NWzsfQlzix7WdxRk59ancuULqo3bL5fF2JfjubLDoD5zahtIBF1amDJFco/e1MOQ1Zamf6HGxMZI20epq0m1CCcEGhFh+kDpniyKbPVsG5EEaAmrCMpvGvrk4ZR+lKvb3J1Flkt4dmDYgknoR1QVqEH9vx6LAZef6phM46aTFiQ==
           name: WM_SEC.AUTH_SIGNATURE
-          description: |-
+          description: >-
             Generated signature for authentication.
-            Signature is generated based on private key, consumer Id and the key version.
 
-            As the public key is available in service registry portal ( as we have generated consumer Id by submitting ssh public key), generated signature will be decoded by public key and validated using RSA algorithm.
-            Signature will be valid for 5 mins, so that after every 5 mins signature should be regenerated for the new requests.
+            Signature is generated based on private key, consumer Id and the key
+            version.
 
-            This is a mandatory header to be passed in stage & prod environments as the signature authetication is in place.
+
+            As the public key is available in service registry portal ( as we
+            have generated consumer Id by submitting ssh public key), generated
+            signature will be decoded by public key and validated using RSA
+            algorithm.
+
+            Signature will be valid for 5 mins, so that after every 5 mins
+            signature should be regenerated for the new requests.
+
+
+            This is a mandatory header to be passed in stage & prod environments
+            as the signature authetication is in place.
           schema:
             type: string
           in: header
@@ -5299,7 +5727,7 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/LocationResponse"
+                $ref: '#/components/schemas/LocationResponse'
               examples:
                 Location Type Code 100001:
                   value:
@@ -5320,13 +5748,13 @@ paths:
                         timeZoneId: America/Chicago
                         timeZoneCode: CDT
                         glnNumbers:
-                          - '0078742014937'
+                          - 0078742014937
                         timeZoneDSTObservable: true
                         logisticalCountryCode: US
                         type: Retail
                         typeCode: 100001
                         statusCode: 5
-                        status: OLD, MORE THAN 13 MONTHS SINCE RE-GRAND
+                        status: 'OLD, MORE THAN 13 MONTHS SINCE RE-GRAND'
                         buID: 295634
                         tempStoreFlag: false
                         languageCode: 101
@@ -5424,11 +5852,11 @@ paths:
                               - departmentNbr: 30
                                 departmentDesc: FOUNDATIONS
                               - departmentNbr: 31
-                                departmentDesc: FASHION, ACCESS & LUGGAGE
+                                departmentDesc: 'FASHION, ACCESS & LUGGAGE'
                               - departmentNbr: 33
                                 departmentDesc: GIRLS WEAR
                               - departmentNbr: 34
-                                departmentDesc: MISSY, ACTIVE & JUNIOR APPAREL
+                                departmentDesc: 'MISSY, ACTIVE & JUNIOR APPAREL'
                               - departmentNbr: 35
                                 departmentDesc: PLUS SIZES/MATERNITY
                               - departmentNbr: 36
@@ -5440,7 +5868,7 @@ paths:
                               - departmentNbr: 56
                                 departmentDesc: LIVE PLANTS
                               - departmentNbr: 60
-                                departmentDesc: STAMPS, BUILD A BEAR, KIDS CONNECT
+                                departmentDesc: 'STAMPS, BUILD A BEAR, KIDS CONNECT'
                               - departmentNbr: 67
                                 departmentDesc: CELEBRATION
                               - departmentNbr: 69
@@ -5542,7 +5970,7 @@ paths:
                             businessUnitOrgAreaCode: 99
                             lastUpdatedTimestamp: '2020-06-03'
                             lastUpdatedUser: HRM DATA
-                            storeCode3: N
+                            storeCode3: 'N'
                             companyCode: WMW
                             taxReportCode: 110
                             reportCode: SC
@@ -5600,7 +6028,7 @@ paths:
                             shrinkRetailPct: 0
                             departments:
                               - departmentNbr: 32
-                                departmentDesc: JEWELRY, SUNGLASSES
+                                departmentDesc: 'JEWELRY, SUNGLASSES'
                               - departmentNbr: 47
                                 departmentDesc: JEWELRY
                           - divisionNbr: 15
@@ -5764,7 +6192,7 @@ paths:
                             shrinkRetailPct: 0
                             departments:
                               - departmentNbr: 1
-                                departmentDesc: CANDY, TOBACCO
+                                departmentDesc: 'CANDY, TOBACCO'
                               - departmentNbr: 92
                                 departmentDesc: GROCERY
                               - departmentNbr: 95
@@ -5841,7 +6269,7 @@ paths:
                             businessUnitOrgAreaCode: 2
                             lastUpdatedTimestamp: '2020-06-03'
                             lastUpdatedUser: HRM DATA
-                            storeCode3: N
+                            storeCode3: 'N'
                             reportCode: WK
                             deleteCode: A
                             shrinkPctCost: 0
@@ -5908,7 +6336,7 @@ paths:
                             businessUnitOrgAreaCode: 2
                             lastUpdatedTimestamp: '2020-06-03'
                             lastUpdatedUser: HRM DATA
-                            storeCode3: N
+                            storeCode3: 'N'
                             companyCode: WR
                             taxReportCode: 310
                             reportCode: WR
@@ -5917,33 +6345,35 @@ paths:
                             shrinkRetailPct: 0
                         associates:
                           - firstName: JOSEPH
-                            lastName: " CLAREY"
+                            lastName: ' CLAREY'
                             role: MGMT-STORE MANAGER
                             email: J0C04I9.S01526.US@WAL-MART.COM
                             fullName: JOSEPH CLAREY
                           - firstName: LISA DE
-                            lastName: " BOER"
+                            lastName: ' BOER'
                             role: MGMT-MARKET MANAGER
                             email: LDEBOER@WALMART.COM
                             fullName: LISA DE BOER
                           - firstName: GREGORY
-                            lastName: " LUNDELL"
+                            lastName: ' LUNDELL'
                             role: MGMT-REGIONAL MANAGER - AP
                             email: GREGORY.LUNDELL@WALMART.COM
                             fullName: GREGORY LUNDELL
                         mainWarehouse: 6009
                         lastUpdatedDate: '2020-10-01'
                         lastUpdatedTimestamp: '2020-09-29'
-          description: Successfully returns Stores information for the given country
-            code and location type.
+          description: >-
+            Successfully returns Stores information for the given country code
+            and location type.
         '204':
-          description: No Content is returned when there is no data for the given
-            country code and location type.
+          description: >-
+            No Content is returned when there is no data for the given country
+            code and location type.
         '400':
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
               examples:
                 Invalid Location Type Code:
                   value:
@@ -5952,22 +6382,23 @@ paths:
                     error:
                       errorCode: 105
                       message: Location type code is invalid
-          description: Bad Request is returned when one or many given criteria are
-            of wrong data type or value.
+          description: >-
+            Bad Request is returned when one or many given criteria are of wrong
+            data type or value.
         '500':
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-          description: Internal Server Error is returned in case there is a connectivity
-            issue with the dependent resource or the dependent resource itself throws
-            some exception.
+                $ref: '#/components/schemas/ErrorResponse'
+          description: >-
+            Internal Server Error is returned in case there is a connectivity
+            issue with the dependent resource or the dependent resource itself
+            throws some exception.
       deprecated: false
       operationId: getLocationsByTypeCodeUsingGET
       summary: Fetches all stores information of a given type.
-      description: Fetches all store information based on country code and location
-        type.
-  "/{countryCode}/location/storeManagerInfo":
+      description: Fetches all store information based on country code and location type.
+  '/{countryCode}/location/storeManagerInfo':
     summary: Represents store manager information for stores in a country
     description: Represents store manager information for stores in a country
     get:
@@ -5980,13 +6411,15 @@ paths:
             USA:
               value: US
           name: countryCode
-          description: Standard country code. Example US = USA, CA = Canada
+          description: 'Standard country code. Example US = USA, CA = Canada'
           schema:
             type: string
           in: path
           required: true
         - name: locationNumber
-          description: Unique location number whose store manager's information is required.
+          description: >-
+            Unique location number whose store manager's information is
+            required.
           schema:
             format: int32
             type: integer
@@ -6005,13 +6438,23 @@ paths:
             Name of the producer application:
               value: AP-FDS-LOCATIONS-API
           name: WM_SVC.NAME
-          description: "Unique name ( application key name) of the producer application
-          as registered in the service registry portal \n( https://reg.soa.walmart.com).\nConsumer
-          applications have to get a subscription to this producer application in
-          the service registry portal.\nThe actual producer application will have
-          a sidecar deployment of service mesh proxy along with it.\nHence all the
-          consumers need to pass the mandatory headers and get authorization and authentication
-          to reach the application.\n\nThis header is required in all the environments."
+          description: >-
+            Unique name ( application key name) of the producer application as
+            registered in the service registry portal
+
+            ( https://reg.soa.walmart.com).
+
+            Consumer applications have to get a subscription to this producer
+            application in the service registry portal.
+
+            The actual producer application will have a sidecar deployment of
+            service mesh proxy along with it.
+
+            Hence all the consumers need to pass the mandatory headers and get
+            authorization and authentication to reach the application.
+
+
+            This header is required in all the environments.
           schema:
             type: string
           in: header
@@ -6020,13 +6463,26 @@ paths:
             Environment name of the producer application:
               value: prod
           name: WM_SVC.ENV
-          description: |
-            Name of the environment of the producer application in the service registry portal to which consumer application is subscribed to.
-            For each environment which has to be deployed, an environment is created in service registry portal and same is used to configure the sidecar proxy deployment.
-            As the subscription in service mesh is environment specific; this is a mandatory parameter in all the environments.
+          description: >
+            Name of the environment of the producer application in the service
+            registry portal to which consumer application is subscribed to.
+
+            For each environment which has to be deployed, an environment is
+            created in service registry portal and same is used to configure the
+            sidecar proxy deployment.
+
+            As the subscription in service mesh is environment specific; this is
+            a mandatory parameter in all the environments.
+
 
             Note:
-            Consumers have to pass enviroments according to their subscription. For example if the dev environment of the consumer application is having a subscription to stage environment of the producer application; then only from dev environment of the consumer application stage environment of the producer can be called by passing the WM_SVC.ENV value as stage.
+
+            Consumers have to pass enviroments according to their subscription.
+            For example if the dev environment of the consumer application is
+            having a subscription to stage environment of the producer
+            application; then only from dev environment of the consumer
+            application stage environment of the producer can be called by
+            passing the WM_SVC.ENV value as stage.
           schema:
             type: string
           in: header
@@ -6035,15 +6491,28 @@ paths:
             Consumer Id of consumer application in a specific environment:
               value: 3fa1e5b2-6c55-4d0f-8ae5-634dbbb723432
           name: WM_CONSUMER.ID
-          description: |
-            Consumer Id in the consumer application from which it has a subscription to the environment (value of WM_SVC.ENV) of the producer application.
+          description: >
+            Consumer Id in the consumer application from which it has a
+            subscription to the environment (value of WM_SVC.ENV) of the
+            producer application.
 
-            Consumer Id can be created in the service registry portal with ssh public key.
+
+            Consumer Id can be created in the service registry portal with ssh
+            public key.
+
             A unique string will be generated for the given public key.
 
-            If a consumer application in dev environment(with consumer Id = 3fa1e5b2-6c55-4d0f-8ae5-634dbbb723242) have a subscription to stage environment of the producer application ( AP-FDS-LOCATIONS-API), then there will be an entry created in the service registry database as AP-FDS-LOCATIONS-API/stage/3fa1e5b2-6c55-4d0f-8ae5-634dbbb723242
 
-            Hence when the consumer pass these 3 headers, it will match with the entry in the database; hence the request will be authorized.
+            If a consumer application in dev environment(with consumer Id =
+            3fa1e5b2-6c55-4d0f-8ae5-634dbbb723242) have a subscription to stage
+            environment of the producer application ( AP-FDS-LOCATIONS-API),
+            then there will be an entry created in the service registry database
+            as AP-FDS-LOCATIONS-API/stage/3fa1e5b2-6c55-4d0f-8ae5-634dbbb723242
+
+
+            Hence when the consumer pass these 3 headers, it will match with the
+            entry in the database; hence the request will be authorized.
+
 
             This is a mandatory header in all the environments.
           schema:
@@ -6054,11 +6523,14 @@ paths:
             Version of the consumer Id:
               value: '1'
           name: WM_SEC.KEY_VERSION
-          description: |-
+          description: >-
             Key version of the consumer Id as per the service registry portal.
+
             This is autogenerated field when consumer Id is created.
 
-            This is a mandatory header in stage & prod environments as the signature authentication is in place.
+
+            This is a mandatory header in stage & prod environments as the
+            signature authentication is in place.
           schema:
             type: integer
           in: header
@@ -6067,27 +6539,42 @@ paths:
             Timestamp at the time of signature generation:
               value: '1596901065233'
           name: WM_CONSUMER.INTIMESTAMP
-          description: |-
+          description: >-
             Timestamp in epoch at the time of signature generation.
-            As the generated signature expires every 5 mins, timestamp field has to be passed with the signature for the validation.
 
-            This is a mandatory field for stage & prod environments as the signature authentication is in place.
+            As the generated signature expires every 5 mins, timestamp field has
+            to be passed with the signature for the validation.
+
+
+            This is a mandatory field for stage & prod environments as the
+            signature authentication is in place.
           schema:
             type: integer
           in: header
           required: true
         - examples:
             Sample signature:
-              value: jMXoVjlgcSTwSifCzQ1CM88/ZtzIG49Ec2xy5yUWKfh/42+XN8U9ROd/kj6W/kRqWoU+vtZQrkSovyaV6WkxqK62AGjqXmiVqcyfRZmmrOne80QlrJ2j7MjXv+rhoYf0qvGCTu1S3xMsLN3rh0FtoM4v6TO/Iy7C+RqOxCx7C39NWzsfQlzix7WdxRk59ancuULqo3bL5fF2JfjubLDoD5zahtIBF1amDJFco/e1MOQ1Zamf6HGxMZI20epq0m1CCcEGhFh+kDpniyKbPVsG5EEaAmrCMpvGvrk4ZR+lKvb3J1Flkt4dmDYgknoR1QVqEH9vx6LAZef6phM46aTFiQ==
+              value: >-
+                jMXoVjlgcSTwSifCzQ1CM88/ZtzIG49Ec2xy5yUWKfh/42+XN8U9ROd/kj6W/kRqWoU+vtZQrkSovyaV6WkxqK62AGjqXmiVqcyfRZmmrOne80QlrJ2j7MjXv+rhoYf0qvGCTu1S3xMsLN3rh0FtoM4v6TO/Iy7C+RqOxCx7C39NWzsfQlzix7WdxRk59ancuULqo3bL5fF2JfjubLDoD5zahtIBF1amDJFco/e1MOQ1Zamf6HGxMZI20epq0m1CCcEGhFh+kDpniyKbPVsG5EEaAmrCMpvGvrk4ZR+lKvb3J1Flkt4dmDYgknoR1QVqEH9vx6LAZef6phM46aTFiQ==
           name: WM_SEC.AUTH_SIGNATURE
-          description: |-
+          description: >-
             Generated signature for authentication.
-            Signature is generated based on private key, consumer Id and the key version.
 
-            As the public key is available in service registry portal ( as we have generated consumer Id by submitting ssh public key), generated signature will be decoded by public key and validated using RSA algorithm.
-            Signature will be valid for 5 mins, so that after every 5 mins signature should be regenerated for the new requests.
+            Signature is generated based on private key, consumer Id and the key
+            version.
 
-            This is a mandatory header to be passed in stage & prod environments as the signature authetication is in place.
+
+            As the public key is available in service registry portal ( as we
+            have generated consumer Id by submitting ssh public key), generated
+            signature will be decoded by public key and validated using RSA
+            algorithm.
+
+            Signature will be valid for 5 mins, so that after every 5 mins
+            signature should be regenerated for the new requests.
+
+
+            This is a mandatory header to be passed in stage & prod environments
+            as the signature authetication is in place.
           schema:
             type: string
           in: header
@@ -6097,29 +6584,31 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/SuccessStoreManagerResponse"
+                $ref: '#/components/schemas/SuccessStoreManagerResponse'
               examples:
-                locationNumber = 998, managerRole = STOREMANAGER:
+                'locationNumber = 998, managerRole = STOREMANAGER':
                   value:
                     success: true
                     timestamp: '2020-10-06 13:02:13'
                     data:
                       - firstName: BRAD
-                        lastName: " SHERWOOD"
+                        lastName: ' SHERWOOD'
                         role: MGMT-STORE MANAGER
                         email: B0S01CF.S00998.US@WAL-MART.COM
                         locationNbr: 998
                         fullName: BRAD SHERWOOD
-          description: Successfully returns Store manager information for the given
-            country code, location number and manager role.
+          description: >-
+            Successfully returns Store manager information for the given country
+            code, location number and manager role.
         '204':
-          description: No Content is returned when there is no data for the given
-            country code, location number and manager role.
+          description: >-
+            No Content is returned when there is no data for the given country
+            code, location number and manager role.
         '400':
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
               examples:
                 "Invalid Location Number\t":
                   value:
@@ -6128,16 +6617,18 @@ paths:
                     error:
                       errorCode: 105
                       message: Location number is required
-          description: Bad Request is returned when one or many given criteria are
-            of wrong data type or value.
+          description: >-
+            Bad Request is returned when one or many given criteria are of wrong
+            data type or value.
         '500':
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-          description: Internal Server Error is returned in case there is a connectivity
-            issue with the dependent resource or the dependent resource itself throws
-            some exception.
+                $ref: '#/components/schemas/ErrorResponse'
+          description: >-
+            Internal Server Error is returned in case there is a connectivity
+            issue with the dependent resource or the dependent resource itself
+            throws some exception.
       deprecated: false
       operationId: getStoreManagerInfoUsingGET
       summary: Fetches store manager information for stores in a country.
@@ -6148,7 +6639,7 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/StoreManagerRequest"
+              $ref: '#/components/schemas/StoreManagerRequest'
             examples:
               1. Create Store Manager Info:
                 value:
@@ -6165,7 +6656,7 @@ paths:
             USA:
               value: US
           name: countryCode
-          description: Standard country code. Example US = USA, CA = Canada
+          description: 'Standard country code. Example US = USA, CA = Canada'
           schema:
             type: string
           in: path
@@ -6174,13 +6665,23 @@ paths:
             Name of the producer application:
               value: AP-FDS-LOCATIONS-API
           name: WM_SVC.NAME
-          description: "Unique name ( application key name) of the producer application
-          as registered in the service registry portal \n( https://reg.soa.walmart.com).\nConsumer
-          applications have to get a subscription to this producer application in
-          the service registry portal.\nThe actual producer application will have
-          a sidecar deployment of service mesh proxy along with it.\nHence all the
-          consumers need to pass the mandatory headers and get authorization and authentication
-          to reach the application.\n\nThis header is required in all the environments."
+          description: >-
+            Unique name ( application key name) of the producer application as
+            registered in the service registry portal
+
+            ( https://reg.soa.walmart.com).
+
+            Consumer applications have to get a subscription to this producer
+            application in the service registry portal.
+
+            The actual producer application will have a sidecar deployment of
+            service mesh proxy along with it.
+
+            Hence all the consumers need to pass the mandatory headers and get
+            authorization and authentication to reach the application.
+
+
+            This header is required in all the environments.
           schema:
             type: string
           in: header
@@ -6189,13 +6690,26 @@ paths:
             Environment name of the producer application:
               value: prod
           name: WM_SVC.ENV
-          description: |
-            Name of the environment of the producer application in the service registry portal to which consumer application is subscribed to.
-            For each environment which has to be deployed, an environment is created in service registry portal and same is used to configure the sidecar proxy deployment.
-            As the subscription in service mesh is environment specific; this is a mandatory parameter in all the environments.
+          description: >
+            Name of the environment of the producer application in the service
+            registry portal to which consumer application is subscribed to.
+
+            For each environment which has to be deployed, an environment is
+            created in service registry portal and same is used to configure the
+            sidecar proxy deployment.
+
+            As the subscription in service mesh is environment specific; this is
+            a mandatory parameter in all the environments.
+
 
             Note:
-            Consumers have to pass enviroments according to their subscription. For example if the dev environment of the consumer application is having a subscription to stage environment of the producer application; then only from dev environment of the consumer application stage environment of the producer can be called by passing the WM_SVC.ENV value as stage.
+
+            Consumers have to pass enviroments according to their subscription.
+            For example if the dev environment of the consumer application is
+            having a subscription to stage environment of the producer
+            application; then only from dev environment of the consumer
+            application stage environment of the producer can be called by
+            passing the WM_SVC.ENV value as stage.
           schema:
             type: string
           in: header
@@ -6204,15 +6718,28 @@ paths:
             Consumer Id of consumer application in a specific environment:
               value: 3fa1e5b2-6c55-4d0f-8ae5-634dbbb723432
           name: WM_CONSUMER.ID
-          description: |
-            Consumer Id in the consumer application from which it has a subscription to the environment (value of WM_SVC.ENV) of the producer application.
+          description: >
+            Consumer Id in the consumer application from which it has a
+            subscription to the environment (value of WM_SVC.ENV) of the
+            producer application.
 
-            Consumer Id can be created in the service registry portal with ssh public key.
+
+            Consumer Id can be created in the service registry portal with ssh
+            public key.
+
             A unique string will be generated for the given public key.
 
-            If a consumer application in dev environment(with consumer Id = 3fa1e5b2-6c55-4d0f-8ae5-634dbbb723242) have a subscription to stage environment of the producer application ( AP-FDS-LOCATIONS-API), then there will be an entry created in the service registry database as AP-FDS-LOCATIONS-API/stage/3fa1e5b2-6c55-4d0f-8ae5-634dbbb723242
 
-            Hence when the consumer pass these 3 headers, it will match with the entry in the database; hence the request will be authorized.
+            If a consumer application in dev environment(with consumer Id =
+            3fa1e5b2-6c55-4d0f-8ae5-634dbbb723242) have a subscription to stage
+            environment of the producer application ( AP-FDS-LOCATIONS-API),
+            then there will be an entry created in the service registry database
+            as AP-FDS-LOCATIONS-API/stage/3fa1e5b2-6c55-4d0f-8ae5-634dbbb723242
+
+
+            Hence when the consumer pass these 3 headers, it will match with the
+            entry in the database; hence the request will be authorized.
+
 
             This is a mandatory header in all the environments.
           schema:
@@ -6223,11 +6750,14 @@ paths:
             Version of the consumer Id:
               value: '1'
           name: WM_SEC.KEY_VERSION
-          description: |-
+          description: >-
             Key version of the consumer Id as per the service registry portal.
+
             This is autogenerated field when consumer Id is created.
 
-            This is a mandatory header in stage & prod environments as the signature authentication is in place.
+
+            This is a mandatory header in stage & prod environments as the
+            signature authentication is in place.
           schema:
             type: integer
           in: header
@@ -6236,27 +6766,42 @@ paths:
             Timestamp at the time of signature generation:
               value: '1596901065233'
           name: WM_CONSUMER.INTIMESTAMP
-          description: |-
+          description: >-
             Timestamp in epoch at the time of signature generation.
-            As the generated signature expires every 5 mins, timestamp field has to be passed with the signature for the validation.
 
-            This is a mandatory field for stage & prod environments as the signature authentication is in place.
+            As the generated signature expires every 5 mins, timestamp field has
+            to be passed with the signature for the validation.
+
+
+            This is a mandatory field for stage & prod environments as the
+            signature authentication is in place.
           schema:
             type: integer
           in: header
           required: true
         - examples:
             Sample signature:
-              value: jMXoVjlgcSTwSifCzQ1CM88/ZtzIG49Ec2xy5yUWKfh/42+XN8U9ROd/kj6W/kRqWoU+vtZQrkSovyaV6WkxqK62AGjqXmiVqcyfRZmmrOne80QlrJ2j7MjXv+rhoYf0qvGCTu1S3xMsLN3rh0FtoM4v6TO/Iy7C+RqOxCx7C39NWzsfQlzix7WdxRk59ancuULqo3bL5fF2JfjubLDoD5zahtIBF1amDJFco/e1MOQ1Zamf6HGxMZI20epq0m1CCcEGhFh+kDpniyKbPVsG5EEaAmrCMpvGvrk4ZR+lKvb3J1Flkt4dmDYgknoR1QVqEH9vx6LAZef6phM46aTFiQ==
+              value: >-
+                jMXoVjlgcSTwSifCzQ1CM88/ZtzIG49Ec2xy5yUWKfh/42+XN8U9ROd/kj6W/kRqWoU+vtZQrkSovyaV6WkxqK62AGjqXmiVqcyfRZmmrOne80QlrJ2j7MjXv+rhoYf0qvGCTu1S3xMsLN3rh0FtoM4v6TO/Iy7C+RqOxCx7C39NWzsfQlzix7WdxRk59ancuULqo3bL5fF2JfjubLDoD5zahtIBF1amDJFco/e1MOQ1Zamf6HGxMZI20epq0m1CCcEGhFh+kDpniyKbPVsG5EEaAmrCMpvGvrk4ZR+lKvb3J1Flkt4dmDYgknoR1QVqEH9vx6LAZef6phM46aTFiQ==
           name: WM_SEC.AUTH_SIGNATURE
-          description: |-
+          description: >-
             Generated signature for authentication.
-            Signature is generated based on private key, consumer Id and the key version.
 
-            As the public key is available in service registry portal ( as we have generated consumer Id by submitting ssh public key), generated signature will be decoded by public key and validated using RSA algorithm.
-            Signature will be valid for 5 mins, so that after every 5 mins signature should be regenerated for the new requests.
+            Signature is generated based on private key, consumer Id and the key
+            version.
 
-            This is a mandatory header to be passed in stage & prod environments as the signature authetication is in place.
+
+            As the public key is available in service registry portal ( as we
+            have generated consumer Id by submitting ssh public key), generated
+            signature will be decoded by public key and validated using RSA
+            algorithm.
+
+            Signature will be valid for 5 mins, so that after every 5 mins
+            signature should be regenerated for the new requests.
+
+
+            This is a mandatory header to be passed in stage & prod environments
+            as the signature authetication is in place.
           schema:
             type: string
           in: header
@@ -6266,28 +6811,29 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/SuccessStoreManagerResponse"
+                $ref: '#/components/schemas/SuccessStoreManagerResponse'
               examples:
-                1. Create Store Manager Info for Location Number =50 , managerRole = "STOREMANAGER":
+                '1. Create Store Manager Info for Location Number =50 , managerRole = "STOREMANAGER"':
                   value:
                     success: true
                     timestamp: '2020-10-06 13:08:25'
                     data:
                       - firstName: JARED
-                        lastName: " CASH"
+                        lastName: ' CASH'
                         role: MGMT-STORE MANAGER
                         email: JDCASH.S00050.US@WAL-MART.COM
                         locationNbr: 50
                         fullName: JARED CASH
-          description: Successfully returns created Store manager information for
-            the given country code, location number and manager role.
+          description: >-
+            Successfully returns created Store manager information for the given
+            country code, location number and manager role.
         '204':
           description: No Content
         '400':
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
               examples:
                 Invalid Location Type Code:
                   value:
@@ -6303,16 +6849,18 @@ paths:
                     error:
                       errorCode: 103
                       message: Manager role is required
-          description: Bad Request is returned when one or many given criteria are
-            of wrong data type or value.
+          description: >-
+            Bad Request is returned when one or many given criteria are of wrong
+            data type or value.
         '500':
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-          description: Internal Server Error is returned in case there is a connectivity
-            issue with the dependent resource or the dependent resource itself throws
-            some exception.
+                $ref: '#/components/schemas/ErrorResponse'
+          description: >-
+            Internal Server Error is returned in case there is a connectivity
+            issue with the dependent resource or the dependent resource itself
+            throws some exception.
       deprecated: false
       operationId: getStoreManagerInfoUsingPOST
       summary: Saves store manager's information.
@@ -6329,18 +6877,21 @@ components:
           type: integer
         pageNumber:
           format: int32
-          description: Represents zero based index of page to fetch. If offset is
-            provided, that too will be considered.
+          description: >-
+            Represents zero based index of page to fetch. If offset is provided,
+            that too will be considered.
           type: integer
         offset:
           format: int64
-          description: Zero based index of number of records to skip from start. If
-            not mentioned, it is considered zero.
+          description: >-
+            Zero based index of number of records to skip from start. If not
+            mentioned, it is considered zero.
           type: integer
         sort:
-          "$ref": "#/components/schemas/Sort"
-          description: 'Sorting criteria in the format: property(,asc|desc). Default
-            sort order is ascending. Multiple sort criteria are supported.'
+          $ref: '#/components/schemas/Sort'
+          description: >-
+            Sorting criteria in the format: property(,asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
         paged:
           description: Boolean to represent paged information.
           type: boolean
@@ -6378,7 +6929,7 @@ components:
           type: string
       example:
         firstName: JOSEPH
-        lastName: " CLAREY"
+        lastName: ' CLAREY'
         role: MGMT-STORE MANAGER
         email: J0C04I9.S01526.US@WAL-MART.COM
         fullName: JOSEPH CLAREY
@@ -6483,7 +7034,7 @@ components:
           description: List of all departments for a division.
           type: array
           items:
-            "$ref": "#/components/schemas/Department"
+            $ref: '#/components/schemas/Department'
       example:
         divisionNbr: 6
         divisionDesc: AUTO CARE CENTER
@@ -6676,12 +7227,12 @@ components:
           description: List of Divisions.
           type: array
           items:
-            "$ref": "#/components/schemas/Division"
+            $ref: '#/components/schemas/Division'
         associates:
           description: List of associates.
           type: array
           items:
-            "$ref": "#/components/schemas/Associates"
+            $ref: '#/components/schemas/Associates'
         mainWarehouse:
           format: int32
           description: Main warehouse.
@@ -6713,13 +7264,13 @@ components:
         timeZoneId: America/Chicago
         timeZoneCode: CDT
         glnNumbers:
-          - '0078742014937'
+          - 0078742014937
         timeZoneDSTObservable: true
         logisticalCountryCode: US
         type: Retail
         typeCode: 100001
         statusCode: 5
-        status: OLD, MORE THAN 13 MONTHS SINCE RE-GRAND
+        status: 'OLD, MORE THAN 13 MONTHS SINCE RE-GRAND'
         buID: 295634
         tempStoreFlag: false
         languageCode: 101
@@ -6770,7 +7321,7 @@ components:
                 departmentDesc: AUTOMOTIVE TEST
         associates:
           - firstName: JOSEPH
-            lastName: " CLAREY"
+            lastName: ' CLAREY'
             role: MGMT-STORE MANAGER
             email: J0C04I9.S01526.US@WAL-MART.COM
             fullName: JOSEPH CLAREY
@@ -6786,8 +7337,9 @@ components:
       type: object
       properties:
         success:
-          description: Boolean field indicating if the response was successfully fetched
-            or not.
+          description: >-
+            Boolean field indicating if the response was successfully fetched or
+            not.
           type: boolean
         timestamp:
           format: date-time
@@ -6797,7 +7349,7 @@ components:
           description: List of complete Location object.
           type: array
           items:
-            "$ref": "#/components/schemas/Location"
+            $ref: '#/components/schemas/Location'
       example:
         success: true
         timestamp: '2020-10-06 11:22:38'
@@ -6816,13 +7368,13 @@ components:
             timeZoneId: America/Chicago
             timeZoneCode: CDT
             glnNumbers:
-              - '0078742014937'
+              - 0078742014937
             timeZoneDSTObservable: true
             logisticalCountryCode: US
             type: Retail
             typeCode: 100001
             statusCode: 5
-            status: OLD, MORE THAN 13 MONTHS SINCE RE-GRAND
+            status: 'OLD, MORE THAN 13 MONTHS SINCE RE-GRAND'
             buID: 295634
             tempStoreFlag: false
             languageCode: 101
@@ -6873,7 +7425,7 @@ components:
                     departmentDesc: AUTOMOTIVE TEST
             associates:
               - firstName: JOSEPH
-                lastName: " CLAREY"
+                lastName: ' CLAREY'
                 role: MGMT-STORE MANAGER
                 email: J0C04I9.S01526.US@WAL-MART.COM
                 fullName: JOSEPH CLAREY
@@ -6889,15 +7441,16 @@ components:
       type: object
       properties:
         success:
-          description: Boolean field indicating if the response was successfully fetched
-            or not.
+          description: >-
+            Boolean field indicating if the response was successfully fetched or
+            not.
           type: boolean
         timestamp:
           format: date-time
           description: The timestamp at which the response was generated.
           type: string
         data:
-          "$ref": "#/components/schemas/Location"
+          $ref: '#/components/schemas/Location'
           description: Complete Location object.
       example:
         success: true
@@ -6917,13 +7470,13 @@ components:
           timeZoneId: America/Chicago
           timeZoneCode: CDT
           glnNumbers:
-            - '0078742014937'
+            - 0078742014937
           timeZoneDSTObservable: true
           logisticalCountryCode: US
           type: Retail
           typeCode: 100001
           statusCode: 5
-          status: OLD, MORE THAN 13 MONTHS SINCE RE-GRAND
+          status: 'OLD, MORE THAN 13 MONTHS SINCE RE-GRAND'
           buID: 295634
           tempStoreFlag: false
           languageCode: 101
@@ -6974,7 +7527,7 @@ components:
                   departmentDesc: AUTOMOTIVE TEST
           associates:
             - firstName: JOSEPH
-              lastName: " CLAREY"
+              lastName: ' CLAREY'
               role: MGMT-STORE MANAGER
               email: J0C04I9.S01526.US@WAL-MART.COM
               fullName: JOSEPH CLAREY
@@ -7006,22 +7559,24 @@ components:
           type: string
       example:
         firstName: BRAD
-        lastName: " SHERWOOD"
+        lastName: ' SHERWOOD'
         role: MGMT-STORE MANAGER
         email: B0S01CF.S00998.US@WAL-MART.COM
         locationNbr: 998
         fullName: BRAD SHERWOOD
     SuccessStoreManagerResponse:
-      description: |-
-        This is the base response class for Store manager which contains 3 things.
+      description: >-
+        This is the base response class for Store manager which contains 3
+        things.
          - **data** --- List of complete Store manager object
          - **success** --- Boolean field indicating if the response was successfully fetched or not
          - **timestamp** --- The timestamp at which the response was generated
       type: object
       properties:
         success:
-          description: Boolean field indicating if the response was successfully fetched
-            or not.
+          description: >-
+            Boolean field indicating if the response was successfully fetched or
+            not.
           type: boolean
         timestamp:
           format: date-time
@@ -7031,13 +7586,13 @@ components:
           description: List of complete Store manager object.
           type: array
           items:
-            "$ref": "#/components/schemas/StoreManagerResponse"
+            $ref: '#/components/schemas/StoreManagerResponse'
       example:
         success: true
         timestamp: '2020-10-06 13:02:13'
         data:
           - firstName: BRAD
-            lastName: " SHERWOOD"
+            lastName: ' SHERWOOD'
             role: MGMT-STORE MANAGER
             email: B0S01CF.S00998.US@WAL-MART.COM
             locationNbr: 998
@@ -7051,7 +7606,7 @@ components:
           description: Location number.
           type: integer
         countryCode:
-          description: Standard country code. Example US = USA, CA = Canada.
+          description: 'Standard country code. Example US = USA, CA = Canada.'
           type: string
         managerRole:
           description: Manager role.
@@ -7079,23 +7634,25 @@ components:
         storeNumberList:
           - 1175
     SuccessCenterManagedResponse:
-      description: |-
-        This is the base response class for Center managed which contains 3 things.
+      description: >-
+        This is the base response class for Center managed which contains 3
+        things.
          - **data** --- Complete Center managed object
          - **success** --- Boolean field indicating if the response was successfully fetched or not
          - **timestamp** --- The timestamp at which the response was generated
       type: object
       properties:
         success:
-          description: Boolean field indicating if the response was successfully fetched
-            or not.
+          description: >-
+            Boolean field indicating if the response was successfully fetched or
+            not.
           type: boolean
         timestamp:
           format: date-time
           description: The timestamp at which the response was generated.
           type: string
         data:
-          "$ref": "#/components/schemas/CenterManagedResponse"
+          $ref: '#/components/schemas/CenterManagedResponse'
           description: Complete Center managed object.
       example:
         success: true
@@ -7105,15 +7662,17 @@ components:
           storeNumberList:
             - 1175
     ErrorResponse:
-      description: |-
-        This is the base error response class for Location domain which contains 3 things.
+      description: >-
+        This is the base error response class for Location domain which contains
+        3 things.
          - error --- List of errors
          - success --- Boolean field indicating if the response was successfully fetched or not
          - timestamp --- The timestamp at which the response was generated
       type: object
       properties:
         success:
-          description: Boolean field indicating if the error response was successfully
+          description: >-
+            Boolean field indicating if the error response was successfully
             fetched or not.
           type: boolean
         timeStamp:
@@ -7121,7 +7680,7 @@ components:
           description: The timestamp at which the response was generated.
           type: string
         error:
-          "$ref": "#/components/schemas/ErrorModel"
+          $ref: '#/components/schemas/ErrorModel'
           description: List of errors.
       example:
         success: false
